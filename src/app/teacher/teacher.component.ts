@@ -1,19 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Teacher } from './teacher.model';
-
 @Component({
-  selector: 'tesis-teacher',
+  selector: 'app-teacher',
   templateUrl: './teacher.component.html',
   styleUrls: ['./teacher.component.css']
 })
-
 export class TeacherComponent implements OnInit {
-  public teacher: Teacher;
+
+  constructor() { }
 
   ngOnInit() {
-    this.teacher = new Teacher();
-    this.teacher.name = 'Juan';  
   }
 
 }

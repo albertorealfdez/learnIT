@@ -15,5 +15,6 @@ export class LoginComponent implements OnInit {
 
   public onSubmit() {
     console.log('Submitted');
+    this.router.navigate(['/teacher']);
   }
 }
