@@ -5,7 +5,7 @@ import { TeacherComponent } from './teacher.component';
 
 const teacherRoutes: Routes = [
   {
-    path: 'teacher/:id',
+    path: 'teacher',
     component: TeacherComponent
   }
 ]
