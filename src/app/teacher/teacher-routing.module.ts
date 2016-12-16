@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { TeacherComponent } from './teacher.component';
+import { TeacherService } from './teacher.service';
 
 const teacherRoutes: Routes = [
   {
@@ -14,6 +15,7 @@ const teacherRoutes: Routes = [
   imports: [
       RouterModule.forChild(teacherRoutes)
   ],
+  providers: [ TeacherService ],
   exports: [ 
       RouterModule
    ]

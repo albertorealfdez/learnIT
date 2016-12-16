@@ -3,33 +3,33 @@ import { Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { User } from './user.model';
+import { Course } from './course.model';
 
 @Injectable()
-export class UserService {
-  private usersUrl = 'api/users';
+export class CourseService {
+  private coursesUrl = 'api/courses';
 
   constructor(private http: Http) { }
-
-  public getUsers(): Promise<User[]> {
-    return this.http.get(this.usersUrl)
+  public getCourses(): Promise<Course[]> {
+    return this.http.get(this.coursesUrl)
       .toPromise()
       .then(response => {
-        console.log('Users response:', response, response.json(), response.json().data);
-        response.json().data as User[]
+        console.log('Courses response:', response, response.json(), response.json().data);
+        response.json().data as Course[]
       })
       .catch(this.handleError);
   }
 
-  public getUserById(id: number): Promise<User> {
-    const url = `${this.usersUrl}/${id}`;
+  public getCourseById(id: number): Promise<Course> {
+    const url = `${this.coursesUrl}/${id}`;
 
     return this.http.get(url)
       .toPromise()
-      .then(response => response.json().data as User)
+      .then(response => response.json().data as Course)
       .catch(this.handleError);
   }
 
+  
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);

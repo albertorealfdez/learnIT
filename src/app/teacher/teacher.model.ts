@@ -1,8 +1,10 @@
+import { Course } from '../course/course.model';
+
 export class Teacher {
     public id: number;
     public name: string;
     public email: string;
-    public courses: any; //Temporal courses array
+    public courses: Course[];
 
     constructor(
         id: number,
