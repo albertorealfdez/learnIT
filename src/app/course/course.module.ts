@@ -5,19 +5,20 @@ import { FormsModule } from '@angular/forms';
 import { CourseRoutingModule } from './course-routing.module';
 import {
   CourseComponent,
-  CourseService,
-  CompetenceComponent
+  CourseService
 } from './';
+
+import { CompetenceModule } from './competence';
 
 @NgModule({
   imports: [
-    CourseRoutingModule,
     BrowserModule,
-    FormsModule
+    FormsModule,
+    CourseRoutingModule,
+    CompetenceModule
   ],
   declarations: [
-    CourseComponent,
-    CompetenceComponent
+    CourseComponent
   ],
     providers: [ CourseService ]
 })
