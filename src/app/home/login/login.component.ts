@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   public userLogin: any = { // Move to separate class
     email: '',
     password: ''
-  }
+  };
 
   constructor(
     private router: Router,
@@ -32,11 +32,11 @@ export class LoginComponent implements OnInit {
       .then(user => {
         if (user.password === this.userLogin.password) {
           if (user.type === 0) {
-            this.router.navigate(['/teacher']);        
+            this.router.navigate(['/teacher']);
           }
         } else {
-          console.error('Login incorrecto'); 
-        }        
+          console.error('Login incorrecto');
+        }
       });
   }
 }

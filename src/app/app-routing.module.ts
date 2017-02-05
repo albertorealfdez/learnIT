@@ -13,13 +13,13 @@ const appRoutes: Routes = [
     path: 'home',
     component: HomeComponent
   }
-]
+];
 
 @NgModule({
   imports: [
       RouterModule.forRoot(appRoutes)
   ],
-  exports: [ 
+  exports: [
       RouterModule
    ]
 })

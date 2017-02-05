@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { 
+import {
   Course,
   CourseService,
   Competence
 } from './';
 
 @Component({
+  moduleId: module.id,
   selector: 'app-course',
   templateUrl: './course.component.html',
   styleUrls: ['./course.component.css']
@@ -18,7 +19,7 @@ export class CourseComponent implements OnInit {
 
   constructor(
     private courseService: CourseService,
-    private route: ActivatedRoute  
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {

@@ -6,4 +6,5 @@ export let COMPETENCES: Competence[] = [
   { id: 3, key: 'C3', name: 'Pasado simple', threshold: 24 },
   { id: 4, key: 'C4', name: 'Preposiciones', threshold: 19 },
   { id: 5, key: 'C5', name: 'Preguntas (I)', threshold: 20 },
-]
+];
+

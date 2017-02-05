@@ -4,6 +4,7 @@ import { Teacher } from './teacher.model';
 import { CourseService } from '../course/course.service';
 
 @Component({
+  moduleId: module.id,
   selector: 'app-teacher',
   templateUrl: './teacher.component.html',
   styleUrls: ['./teacher.component.css']

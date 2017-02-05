@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
 import { CourseRoutingModule } from './course-routing.module';
-import { 
+import {
   CourseComponent,
   CourseService,
   CompetenceComponent

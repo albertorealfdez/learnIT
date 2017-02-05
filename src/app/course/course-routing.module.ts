@@ -13,13 +13,13 @@ const courseRoutes: Routes = [
     path: 'course/competence/:id',
     component: CompetenceComponent
   }
-]
+];
 
 @NgModule({
   imports: [
       RouterModule.forChild(courseRoutes)
   ],
-  exports: [ 
+  exports: [
       RouterModule
    ]
 })

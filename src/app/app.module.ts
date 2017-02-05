@@ -18,9 +18,9 @@ import { AppComponent } from './app.component';
 
 @NgModule({
   imports: [
-    BrowserModule,
+    BrowserModule, // Angular modules
     HttpModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService),
+    InMemoryWebApiModule.forRoot(InMemoryDataService), // App modules
     AppRoutingModule,
     HeaderModule,
     HomeModule,
