@@ -17,10 +17,12 @@ export class TeacherComponent implements OnInit {
     this.teacher = new Teacher(1, 'Alberto', 'albertorealfdez@gmail.com');
     this.courseService.getCourses()
       .then(courses => {
-        console.log('Courses: ', courses);          
         if (courses) {
           this.teacher.courses = courses;
         }
+      })
+      .catch(error => {
+        console.error('Error in get Courses', error);
       });
   }
 

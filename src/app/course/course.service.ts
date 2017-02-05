@@ -10,12 +10,12 @@ export class CourseService {
   private coursesUrl = 'api/courses';
 
   constructor(private http: Http) { }
+
   public getCourses(): Promise<Course[]> {
     return this.http.get(this.coursesUrl)
       .toPromise()
       .then(response => {
-        console.log('Courses response:', response, response.json(), response.json().data);
-        response.json().data as Course[]
+        return response.json().data as Course[]
       })
       .catch(this.handleError);
   }
@@ -25,7 +25,9 @@ export class CourseService {
 
     return this.http.get(url)
       .toPromise()
-      .then(response => response.json().data as Course)
+      .then(response => {
+        return response.json().data as Course
+      })
       .catch(this.handleError);
   }
 

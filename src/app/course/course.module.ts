@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { CourseRoutingModule } from './course-routing.module';
 import { CourseComponent } from './course.component';
@@ -7,7 +8,8 @@ import { CompetenceComponent } from './competence/competence.component';
 
 @NgModule({
   imports: [
-    CourseRoutingModule
+    CourseRoutingModule,
+    BrowserModule
   ],
   declarations: [
     CourseComponent,
