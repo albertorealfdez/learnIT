@@ -1,15 +1,19 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 import { CourseRoutingModule } from './course-routing.module';
-import { CourseComponent } from './course.component';
-import { CourseService } from './course.service';
-import { CompetenceComponent } from './competence/competence.component';
+import { 
+  CourseComponent,
+  CourseService,
+  CompetenceComponent
+} from './';
 
 @NgModule({
   imports: [
     CourseRoutingModule,
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   declarations: [
     CourseComponent,

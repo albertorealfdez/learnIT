@@ -1,14 +1,15 @@
-<form>
+<form *ngIf="competence">
   <div>
     <label for="key">Clave</label>
-    <input type="text" name="key" required>
+    <input type="text" name="key" [(ngModel)]="competence.key" required>
   </div>
   <div>
     <label for="name">Nombre</label>
-    <input type="text" name="name" required>
+    <input type="text" name="name" [(ngModel)]="competence.name" required>
   </div>
   <div>
     <label for="threshold">Umbral</label>
-    <input type="number" name="threshold" required>
+    <input type="number" name="threshold" [(ngModel)]="competence.threshold" required>
   </div>
+  <input type="submit" value="Guardar">
 </form>

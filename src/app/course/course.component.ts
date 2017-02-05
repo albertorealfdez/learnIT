@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
-import { Course } from './course.model';
-import { CourseService } from './course.service';
+import { 
+  Course,
+  CourseService,
+  Competence
+} from './';
 
 @Component({
   selector: 'app-course',
@@ -19,7 +22,6 @@ export class CourseComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    //this.course = new Course();
     this.getCurrentCourse();
   }
 
@@ -35,6 +37,10 @@ export class CourseComponent implements OnInit {
       .catch(error => {
         console.error('Error in get Course', error);
       });
+  }
+
+  public addCompetence(): void {
+    this.course.competences.push(new Competence());
   }
 
 }

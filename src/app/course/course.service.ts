@@ -15,7 +15,7 @@ export class CourseService {
     return this.http.get(this.coursesUrl)
       .toPromise()
       .then(response => {
-        return response.json().data as Course[]
+        return response.json().data as Course[];
       })
       .catch(this.handleError);
   }
@@ -26,11 +26,21 @@ export class CourseService {
     return this.http.get(url)
       .toPromise()
       .then(response => {
-        return response.json().data as Course
+        return response.json().data as Course;
       })
       .catch(this.handleError);
   }
 
+  public updateCourse(course: Course): Promise<Course> {
+    const url = `${this.coursesUrl}/${course.id}`;
+
+    return this.http.post(url, course)
+      .toPromise()
+      .then(response => {
+        return response;
+      })
+      .catch(this.handleError);
+  }
   
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only

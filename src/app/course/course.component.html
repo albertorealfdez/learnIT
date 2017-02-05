@@ -1,12 +1,16 @@
 <main class="course-page" *ngIf="course">
   <h2>{{course.name}}</h2>
-  <section class="course-page__competences">
+  <section class="course-page__competences"> <!-- Dropdown -->
     <h3>Competencias</h3>
     <ul>
+      <li *ngFor="let competence of course.competences">  <!-- Editable on click-->
+        <app-competence [competence]="competence"></app-competence>
+      </li>
+      <button (click)="addCompetence()">Añadir</button>
     </ul>
   </section>
 
-  <section class="course-page__activities">
+  <section class="course-page__activities">  <!-- Dropdown  -->
     <h3>Actividades</h3>
     <ul>
     </ul>
