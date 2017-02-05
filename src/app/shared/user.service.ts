@@ -30,6 +30,15 @@ export class UserService {
       .catch(this.handleError);
   }
 
+  public getUserByEmail(email: string): Promise<User> {
+    const url = `${this.usersUrl}?email=${email}`;
+    console.log('Here: ', url);
+    return this.http.get(url)
+      .toPromise()
+      .then(response => response.json().data[0] as User)
+      .catch(this.handleError);
+  }
+
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);

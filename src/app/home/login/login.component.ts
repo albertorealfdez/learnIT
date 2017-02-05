@@ -8,8 +8,9 @@ import { UserService } from '../../shared/user.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
-  public userLogin: any = {
+  public userLogin: any = { // Move to separate class
     email: '',
     password: ''
   }
@@ -23,17 +24,19 @@ export class LoginComponent implements OnInit {
   }
 
   public onSubmit() {
-    console.log('Submitted', this.userLogin);
     this.loginUser();
   }
 
   public loginUser(): void {
-    this.userService.getUserById(this.userLogin.password)
+    this.userService.getUserByEmail(this.userLogin.email)
       .then(user => {
-        if (user.type === 0) {
-          this.router.navigate(['/teacher']);        
-        }
-        return true;
+        if (user.password === this.userLogin.password) {
+          if (user.type === 0) {
+            this.router.navigate(['/teacher']);        
+          }
+        } else {
+          console.error('Login incorrecto'); 
+        }        
       });
   }
 }
