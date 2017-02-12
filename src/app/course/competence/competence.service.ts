@@ -9,6 +9,17 @@ export class CompetenceService {
 
   constructor(private http: Http) { }
 
+  public getAllCompetences(): Promise<Competence[]> {
+    const url = `${this.competenceUrl}`;
+
+    return this.http.get(url)
+      .toPromise()
+      .then(response => {
+        return response.json().data as Competence[];
+      })
+      .catch(this.handleError);
+  }
+
   public getCompetence(id: number): Promise<Competence> {
     const url = `${this.competenceUrl}/${id}`;
 
@@ -33,7 +44,7 @@ export class CompetenceService {
 
   public updateCompetence(competence: Competence): Promise<Competence> {
     const url = `${this.competenceUrl}/${competence.id}`;
-
+    console.log('HERE: ', competence, url);
     return this.http.put(url, competence)
       .toPromise()
       .then(response => {

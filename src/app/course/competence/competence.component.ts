@@ -10,17 +10,43 @@ import { CompetenceService } from './competence.service';
 })
 
 export class CompetenceComponent implements OnInit {
+  public requestLoading: boolean;
+
   @Input() competence: Competence;
 
   constructor(private competenceService: CompetenceService) { }
 
   ngOnInit() {
   }
+
+  public createOrUpdateCompetence() {
+    if (this.competence.id) {
+      this.updateCompetence();
+    } else {
+      this.createCompetence();
+    }
+  }
   
+  public createCompetence(): void {
+    this.requestLoading = true;
+
+    this.competenceService.createCompetence(this.competence)
+    .then(competence => {
+        console.log('Created');
+        this.requestLoading = false;
+      })
+      .catch(error => {
+        console.error('Error in create competence', error);
+      });
+  }
+
   public updateCompetence(): void {
+    this.requestLoading = true;
+
     this.competenceService.updateCompetence(this.competence)
     .then(competence => {
-        console.log('Updated')
+        console.log('Updated');
+        this.requestLoading = false;
       })
       .catch(error => {
         console.error('Error in updateCompetence', error);

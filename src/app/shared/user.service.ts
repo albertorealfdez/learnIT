@@ -31,7 +31,7 @@ export class UserService {
 
   public getUserByEmail(email: string): Promise<User> {
     const url = `${this.usersUrl}?email=${email}`;
-    console.log('Here: ', url);
+
     return this.http.get(url)
       .toPromise()
       .then(response => response.json().data[0] as User)
