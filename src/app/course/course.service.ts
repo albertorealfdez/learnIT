@@ -34,7 +34,7 @@ export class CourseService {
   public updateCourse(course: Course): Promise<Course> {
     const url = `${this.coursesUrl}/${course.id}`;
 
-    return this.http.post(url, course)
+    return this.http.put(url, course)
       .toPromise()
       .then(response => {
         return response;

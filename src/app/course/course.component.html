@@ -6,7 +6,8 @@
       <li *ngFor="let competence of course.competences">  <!-- Editable on click-->
         <app-competence [competence]="competence"></app-competence>
       </li>
-      <button (click)="addCompetence()">Añadir</button>
+      <button *ngIf="!showNewCompetence" (click)="addCompetence()">Añadir</button>
+      <button *ngIf="showNewCompetence" (click)="removeLastCompetence()">Cancelar</button>
     </ul>
   </section>
 

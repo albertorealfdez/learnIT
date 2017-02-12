@@ -8,7 +8,7 @@ import {
   CourseService
 } from './';
 
-import { CompetenceModule } from './competence';
+import { CompetenceModule } from './competence/competence.module';
 
 @NgModule({
   imports: [

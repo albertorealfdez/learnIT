@@ -14,8 +14,8 @@ import {
     FormsModule,
     CommonModule
   ],
-  exports: [CompetenceComponent],
   declarations: [CompetenceComponent],
+  exports: [CompetenceComponent],
   providers: [CompetenceService]
 })
 export class CompetenceModule { }

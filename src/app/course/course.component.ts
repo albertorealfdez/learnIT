@@ -4,17 +4,19 @@ import { ActivatedRoute } from '@angular/router';
 import {
   Course,
   CourseService,
-  Competence
 } from './';
+
+import { Competence } from './competence';
 
 @Component({
   selector: 'app-course',
   templateUrl: './course.component.html',
-  styleUrls: ['./course.component.css']
+  styleUrls: ['./course.component.scss']
 })
 
 export class CourseComponent implements OnInit {
   public course: Course;
+  public showNewCompetence: boolean;
 
   constructor(
     private courseService: CourseService,
@@ -40,7 +42,13 @@ export class CourseComponent implements OnInit {
   }
 
   public addCompetence(): void {
+    this.showNewCompetence = true;
     this.course.competences.push(new Competence());
+  }
+
+  public removeLastCompetence(): void {
+    this.showNewCompetence = false;
+    this.course.competences.pop();
   }
 
 }

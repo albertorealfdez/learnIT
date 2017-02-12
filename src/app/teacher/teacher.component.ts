@@ -6,8 +6,9 @@ import { CourseService } from '../course/course.service';
 @Component({
   selector: 'app-teacher',
   templateUrl: './teacher.component.html',
-  styleUrls: ['./teacher.component.css']
+  styleUrls: ['./teacher.component.scss']
 })
+
 export class TeacherComponent implements OnInit {
   public teacher: Teacher;
 
