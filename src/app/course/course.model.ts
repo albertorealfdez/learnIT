@@ -1,4 +1,5 @@
 import { Competence } from './competence';
+import { Activity } from './activity';
 
 export class Course {
   public id: number;
@@ -6,4 +7,5 @@ export class Course {
   public name: string;
   public year: number;
   public competences: Competence[];
+  public activities: Activity[];
 }

@@ -14,6 +14,9 @@
   <section class="course-page__activities">  <!-- Dropdown  -->
     <h3>Actividades</h3>
     <ul>
+      <li *ngFor="let activity of course.activities">  <!-- Editable on click-->
+        <a routerLink="/activity/{{activity.id}}">{{activity.key}}: {{activity.title}}</a>
+      </li>
     </ul>
   </section>
 </main>

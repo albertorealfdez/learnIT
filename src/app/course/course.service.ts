@@ -20,7 +20,7 @@ export class CourseService {
       .catch(this.handleError);
   }
 
-  public getCourseById(id: number): Promise<Course> {
+  public getCourse(id: number): Promise<Course> {
     const url = `${this.coursesUrl}/${id}`;
 
     return this.http.get(url)

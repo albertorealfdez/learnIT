@@ -9,13 +9,15 @@ import {
 } from './';
 
 import { CompetenceModule } from './competence/competence.module';
+import { ActivityModule } from './activity/activity.module';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
     CourseRoutingModule,
-    CompetenceModule
+    CompetenceModule,
+    ActivityModule
   ],
   declarations: [
     CourseComponent

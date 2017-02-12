@@ -30,7 +30,7 @@ export class CourseComponent implements OnInit {
   public getCurrentCourse(): void {
     let courseId: number = this.route.snapshot.params['id'];
 
-    this.courseService.getCourseById(courseId)
+    this.courseService.getCourse(courseId)
       .then(course => {
         if (course) {
           this.course = course;

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { CourseComponent } from './course.component';
-import { CompetenceComponent } from './competence/competence.component';
+import { ActivityComponent } from './activity/activity.component';
 
 const courseRoutes: Routes = [
   {
@@ -10,8 +10,8 @@ const courseRoutes: Routes = [
     component: CourseComponent
   },
   {
-    path: 'course/competence/:id',
-    component: CompetenceComponent
+    path: 'activity/:id',
+    component: ActivityComponent
   }
 ];
 

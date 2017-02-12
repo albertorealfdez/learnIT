@@ -1,0 +1,22 @@
+<h1>Activity</h1>
+<form *ngIf="activity">
+  <div>
+    <label for="key">Clave</label>
+    <input type="text" name="key" [(ngModel)]="activity.key" required>
+  </div>
+  <div>
+    <label for="title">Título</label>
+    <input type="text" name="title" [(ngModel)]="activity.title" required>
+  </div>
+  <div>
+    <label for="abstract">Resumen</label>
+    <textarea name="abstract" [(ngModel)]="activity.abstract" required>
+    </textarea>
+  </div>
+  <div>
+    <label for="content">Contenido</label>
+    <textarea name="content" [(ngModel)]="activity.content" required>
+    </textarea>
+  </div>
+  <input type="submit" value="Guardar" (click)="createOrUpdateactivity()">
+</form>
