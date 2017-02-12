@@ -18,5 +18,11 @@
     <textarea name="content" [(ngModel)]="activity.content" required>
     </textarea>
   </div>
+  <div>
+    <label for="competences">Competencias</label>
+    <select name="competences">
+      <option *ngFor="let competence of currentCompetences" [value]="competence.id">{{competence.key}}</option>
+    </select>
+  </div>
   <input type="submit" value="Guardar" (click)="createOrUpdateactivity()">
 </form>

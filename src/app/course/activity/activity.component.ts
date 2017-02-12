@@ -3,7 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Activity } from './activity.model';
 import { ActivityService } from './activity.service';
-import { CompetenceService } from '../competence/competence.service';
+import {
+  Competence,
+  CompetenceService
+} from '../competence';
 
 @Component({
   selector: 'app-activity',
@@ -13,6 +16,8 @@ import { CompetenceService } from '../competence/competence.service';
 export class ActivityComponent implements OnInit {
   @Input() activity: Activity;
 
+  public currentCompetences: Competence[];
+
   constructor(
     private activityService: ActivityService,
     private competenceService: CompetenceService,
@@ -20,7 +25,10 @@ export class ActivityComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.currentCompetences = [];
+
     this.getCurrentActivity();
+    this.getCurrentCompetences();
   }
 
   public getCurrentActivity(): void {
@@ -30,6 +38,18 @@ export class ActivityComponent implements OnInit {
       .then(activity => {
         if (activity) {
           this.activity = activity;
+        }
+      })
+      .catch(error => {
+        console.error('Error in get activity', error);
+      });
+  }
+
+  public getCurrentCompetences(): void {
+    this.competenceService.getAllCompetences()
+      .then(competences => {
+        if (competences) {
+          this.currentCompetences = competences;
         }
       })
       .catch(error => {
