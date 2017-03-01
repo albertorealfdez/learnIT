@@ -20,9 +20,13 @@
   </div>
   <div>
     <label for="competences">Competencias</label>
-    <select name="competences">
+    <ul>
+      <li *ngFor="let competence of activity.competences">{{competence.key}}</li>
+    </ul>
+    <select name="competences" [(ngModel)]="selectedCompetence">
       <option *ngFor="let competence of currentCompetences" [value]="competence.id">{{competence.key}}</option>
     </select>
+    <button (click)="addCompetence()">Añadir</button>
   </div>
   <input type="submit" value="Guardar" (click)="createOrUpdateactivity()">
 </form>

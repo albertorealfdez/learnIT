@@ -31,6 +31,17 @@ export class ActivityService {
       .catch(this.handleError);
   }
 
+  public updateActivity(activity: Activity): Promise<Activity> {
+    const url = `${this.activityUrl}/${activity.id}`;
+
+    return this.http.put(url, activity)
+      .toPromise()
+      .then(response => {
+        return response;
+      })
+      .catch(this.handleError);
+  }
+
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);

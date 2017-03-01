@@ -13,10 +13,11 @@ import {
   templateUrl: './activity.component.html',
   styleUrls: ['./activity.component.scss']
 })
-export class ActivityComponent implements OnInit {
-  @Input() activity: Activity;
 
+export class ActivityComponent implements OnInit {
+  public activity: Activity;
   public currentCompetences: Competence[];
+  public selectedCompetence: number;
 
   constructor(
     private activityService: ActivityService,
@@ -50,10 +51,27 @@ export class ActivityComponent implements OnInit {
       .then(competences => {
         if (competences) {
           this.currentCompetences = competences;
+          this.selectedCompetence = this.currentCompetences[0].id;
         }
       })
       .catch(error => {
         console.error('Error in get activity', error);
+      });
+  }
+
+  public addCompetence() {
+    if (this.selectedCompetence) {
+      console.log('Adding: ', this.selectedCompetence);
+    }
+  }
+
+  public createOrUpdateactivity() {
+    this.activityService.updateActivity(this.activity)
+    .then(competence => {
+        console.log('Updated');
+      })
+      .catch(error => {
+        console.error('Error in updateActivity', error);
       });
   }
 
