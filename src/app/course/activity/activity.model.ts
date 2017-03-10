@@ -8,4 +8,5 @@ export class Activity {
   public abstract: string;
   public content: string;
   public competences: Competence[];
+  public answers: Object[]; // TODO: change to real one
 }

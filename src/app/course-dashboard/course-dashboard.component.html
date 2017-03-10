@@ -1,0 +1,22 @@
+<main class="course-page" *ngIf="course">
+  <h2>{{course.name}}</h2>
+  <section class="course-page__competences"> <!-- Dropdown -->
+    <h3>Competencias</h3>
+    <ul>
+      <li *ngFor="let competence of course.competences">  <!-- Editable on click-->
+        <app-competence [competence]="competence"></app-competence>
+      </li>
+      <button *ngIf="!showNewCompetence" (click)="addCompetence()">Añadir</button>
+      <button *ngIf="showNewCompetence" (click)="removeLastCompetence()">Cancelar</button>
+    </ul>
+  </section>
+
+  <section class="course-page__activities">  <!-- Dropdown  -->
+    <h3>Actividades</h3>
+    <ul>
+      <li *ngFor="let activity of course.activities">  <!-- Editable on click-->
+        <a routerLink="/activity/{{activity.id}}/dashboard">{{activity.key}}: {{activity.title}}</a>
+      </li>
+    </ul>
+  </section>
+</main>

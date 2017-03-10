@@ -1,4 +1,4 @@
-import { User } from '../shared/user.model';
+import { User } from '../app/shared/user.model';
 
 export let USERS: User[] = [
   { id: 1, name: 'Alberto', email: 'albertorealfdez@gmail.com', password: '123', type: 0 },

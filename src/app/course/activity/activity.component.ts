@@ -3,10 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Activity } from './activity.model';
 import { ActivityService } from './activity.service';
-import {
-  Competence,
-  CompetenceService
-} from '../competence';
 
 @Component({
   selector: 'app-activity',
@@ -16,20 +12,15 @@ import {
 
 export class ActivityComponent implements OnInit {
   public activity: Activity;
-  public currentCompetences: Competence[];
-  public selectedCompetence: number;
+  public selectedAnswer: number;
 
   constructor(
     private activityService: ActivityService,
-    private competenceService: CompetenceService,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.currentCompetences = [];
-
     this.getCurrentActivity();
-    this.getCurrentCompetences();
   }
 
   public getCurrentActivity(): void {
@@ -46,33 +37,12 @@ export class ActivityComponent implements OnInit {
       });
   }
 
-  public getCurrentCompetences(): void {
-    this.competenceService.getAllCompetences()
-      .then(competences => {
-        if (competences) {
-          this.currentCompetences = competences;
-          this.selectedCompetence = this.currentCompetences[0].id;
-        }
-      })
-      .catch(error => {
-        console.error('Error in get activity', error);
-      });
-  }
-
-  public addCompetence() {
-    if (this.selectedCompetence) {
-      console.log('Adding: ', this.selectedCompetence);
+  public sendAnswer() {
+    // TODO: use a service
+    if (this.selectedAnswer === 2) {
+      console.log('Correct');
+    } else {
+      console.log('Incorrect');
     }
   }
-
-  public createOrUpdateactivity() {
-    this.activityService.updateActivity(this.activity)
-    .then(competence => {
-        console.log('Updated');
-      })
-      .catch(error => {
-        console.error('Error in updateActivity', error);
-      });
-  }
-
 }

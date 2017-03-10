@@ -1,4 +1,4 @@
-import { Course } from '../course/course.model';
+import { Course } from '../app/course/course.model';
 import { COMPETENCES } from './competences.json';
 import { ACTIVITIES } from './activities.json';
 
