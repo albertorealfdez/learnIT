@@ -1,0 +1,10 @@
+<main class="student-page">
+  <h1>{{student.name}}</h1>
+  <section class="student-page__courses">
+    <ul>
+      <li *ngFor="let course of student.courses">
+        <a routerLink="/course/{{course.id}}/dashboard">{{course.name}}</a>
+      </li>
+    </ul>
+  </section>
+</main>

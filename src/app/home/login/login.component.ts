@@ -33,6 +33,8 @@ export class LoginComponent implements OnInit {
         if (user.password === this.userLogin.password) {
           if (user.type === 0) {
             this.router.navigate(['/teacher']);
+          } else {
+            this.router.navigate(['/student']);
           }
         } else {
           console.error('Login incorrecto');

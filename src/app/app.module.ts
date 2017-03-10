@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HeaderModule } from './header/header.module';
 import { HomeModule } from './home/home.module';
 import { TeacherModule } from './teacher/teacher.module';
+import { StudentModule } from './student/student.module';
 import { CourseModule } from './course/course.module';
 import { CourseDashboardModule } from './course-dashboard/course-dashboard.module';
 
@@ -26,6 +27,7 @@ import { AppComponent } from './app.component';
     HeaderModule,
     HomeModule,
     TeacherModule,
+    StudentModule,
     CourseModule,
     CourseDashboardModule
   ],
