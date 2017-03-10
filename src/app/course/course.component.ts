@@ -1,12 +1,14 @@
+import { Student } from '../student/student.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import {
   Course,
-  CourseService,
+  CourseService
 } from './';
 
 import { Competence } from './competence';
+import { Activity } from './activity';
 
 @Component({
   selector: 'app-course',
@@ -17,6 +19,7 @@ import { Competence } from './competence';
 export class CourseComponent implements OnInit {
   public course: Course;
   public showNewCompetence: boolean;
+  public student: Student;
 
   constructor(
     private courseService: CourseService,
@@ -24,6 +27,7 @@ export class CourseComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.student = new Student(1, 'Alberto', 'alberto@al.es'); // TODO: change to current student
     this.getCurrentCourse();
   }
 
@@ -41,14 +45,23 @@ export class CourseComponent implements OnInit {
       });
   }
 
-  public addCompetence(): void {
-    this.showNewCompetence = true;
-    this.course.competences.push(new Competence());
+  public checkCompetence(compentece: Competence): void {
+    console.log(this.course, this.student)
+    this.getNextActivity(compentece);
   }
 
-  public removeLastCompetence(): void {
-    this.showNewCompetence = false;
-    this.course.competences.pop();
-  }
+  // TODO: change to selection service
+  public getNextActivity(competence: Competence): Activity {
+    let activity: Activity;
 
+    for (let courseActivity of this.course.activities) {
+      console.log(courseActivity.competences.indexOf(competence));
+      if (courseActivity.competences.indexOf(competence) != -1) {
+        console.log('Next: ', courseActivity.key);
+        this.student.activities.push(courseActivity);
+      }
+    }
+
+    return activity;
+  }
 }
