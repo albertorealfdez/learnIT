@@ -6,8 +6,8 @@ import {
   CourseService
 } from './';
 
-import { Competence } from './competence';
-import { Activity } from './activity';
+import { Competence } from '../shared/competence.model';
+import { Activity } from '../shared/activity.model';
 import {
   Student,
   StudentService

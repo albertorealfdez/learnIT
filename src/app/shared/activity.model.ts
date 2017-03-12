@@ -1,4 +1,4 @@
-import { Competence } from '../competence';
+import { Competence } from '../shared/competence.model';
 
 export class Activity {
   public id: number;

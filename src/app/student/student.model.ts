@@ -1,5 +1,5 @@
 import { User } from '../shared/user.model';
-import { Activity } from '../course/activity/activity.model';
+import { Activity } from '../shared/activity.model';
 
 export class Student extends User {
     public activities: Activity[];

@@ -8,7 +8,7 @@ import {
   CourseService
 } from './';
 
-import { CompetenceModule } from './competence/competence.module';
+import { CompetenceModule } from './competence-dashboard/competence-dashboard.module';
 import { ActivityDashboardModule } from './activity-dashboard/activity-dashboard.module';
 
 @NgModule({

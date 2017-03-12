@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
-import { Activity } from './activity.model';
+import { Activity } from '../../shared/activity.model';
 
 @Injectable()
 export class ActivityService {

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { CourseService } from './';
-import { Competence } from './competence';
+import { Competence } from '../shared/competence.model';
 import { Course } from '../course/course.model';
 
 @Component({

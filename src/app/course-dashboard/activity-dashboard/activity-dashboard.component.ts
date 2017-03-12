@@ -1,12 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Activity } from '../../course/activity/activity.model';
+import { Activity } from '../../shared/activity.model';
+import { Competence } from '../../shared/competence.model';
 import { ActivityService } from './activity.service';
 import {
-  Competence,
   CompetenceService
-} from '../competence';
+} from '../competence-dashboard';
 
 @Component({
   selector: 'app-activity',

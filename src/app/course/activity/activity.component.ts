@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Activity } from './activity.model';
+import { Activity } from '../../shared/activity.model';
 import { ActivityService } from './activity.service';
 
 @Component({

@@ -1,12 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Competence } from './competence.model';
+import { Competence } from '../../shared/competence.model';
 import { CompetenceService } from './competence.service';
 
 @Component({
   selector: 'app-competence',
-  templateUrl: './competence.component.html',
-  styleUrls: ['./competence.component.scss']
+  templateUrl: './competence-dashboard.component.html',
+  styleUrls: ['./competence-dashboard.component.scss']
 })
 
 export class CompetenceComponent implements OnInit {
@@ -26,7 +26,7 @@ export class CompetenceComponent implements OnInit {
       this.createCompetence();
     }
   }
-  
+
   public createCompetence(): void {
     this.requestLoading = true;
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Competence } from './competence.model';
+import { Competence } from '../../shared/competence.model';
 import { CompetenceService } from './competence.service';
 
 @Component({
@@ -26,7 +26,7 @@ export class CompetenceComponent implements OnInit {
       this.createCompetence();
     }
   }
-  
+
   public createCompetence(): void {
     this.requestLoading = true;
 
