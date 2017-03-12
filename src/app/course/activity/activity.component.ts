@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Activity } from '../../shared/activity.model';
 import { ActivityService } from './activity.service';
@@ -15,8 +15,9 @@ export class ActivityComponent implements OnInit {
   public selectedAnswer: number;
 
   constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
     private activityService: ActivityService,
-    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -24,7 +25,7 @@ export class ActivityComponent implements OnInit {
   }
 
   public getCurrentActivity(): void {
-    let activityId: number = this.route.snapshot.params['id'];
+    let activityId: number = this.activatedRoute.snapshot.params['id'];
 
     this.activityService.getActivity(activityId)
       .then(activity => {
@@ -41,6 +42,7 @@ export class ActivityComponent implements OnInit {
     // TODO: use a service
     if (this.selectedAnswer === 2) {
       console.log('Correct');
+      this.router.navigate(['course', 1]);
     } else {
       console.log('Incorrect');
     }

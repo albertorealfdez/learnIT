@@ -9,4 +9,5 @@ export class Activity {
   public content: string;
   public competences: Competence[];
   public answers: Object[]; // TODO: change to real one
+  public difficulty: number;
 }
