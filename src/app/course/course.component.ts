@@ -1,6 +1,5 @@
-import { Student } from '../student/student.model';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import {
   Course,
@@ -9,6 +8,10 @@ import {
 
 import { Competence } from './competence';
 import { Activity } from './activity';
+import {
+  Student,
+  StudentService
+} from '../student';
 
 @Component({
   selector: 'app-course',
@@ -22,22 +25,34 @@ export class CourseComponent implements OnInit {
   public student: Student;
 
   constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
     private courseService: CourseService,
-    private route: ActivatedRoute
+    private studentService: StudentService
   ) {}
 
   ngOnInit() {
-    this.student = new Student(1, 'Alberto', 'alberto@al.es'); // TODO: change to current student
+    // TODO: change to current student
+    this.studentService.getStudent(1)
+      .then(student => {
+        if (student) {
+          this.student = student; // TODO: check Object.assign
+        }
+      })
+      .catch(error => {
+        console.error('Error in get Course', error);
+      });
+
     this.getCurrentCourse();
   }
 
   public getCurrentCourse(): void {
-    let courseId: number = this.route.snapshot.params['id'];
+    let courseId: number = this.activatedRoute.snapshot.params['id'];
 
     this.courseService.getCourse(courseId)
       .then(course => {
         if (course) {
-          this.course = course;
+          this.course = course; // TODO: check Object.assign
         }
       })
       .catch(error => {
@@ -46,22 +61,37 @@ export class CourseComponent implements OnInit {
   }
 
   public checkCompetence(compentece: Competence): void {
-    console.log(this.course, this.student)
-    this.getNextActivity(compentece);
+    let activity: Activity = this.getNextActivity(compentece);
+
+    if (activity) {
+      this.router.navigate(['activity', activity.id]);
+    }
   }
 
   // TODO: change to selection service
   public getNextActivity(competence: Competence): Activity {
-    let activity: Activity;
-
     for (let courseActivity of this.course.activities) {
-      console.log(courseActivity.competences.indexOf(competence));
-      if (courseActivity.competences.indexOf(competence) != -1) {
-        console.log('Next: ', courseActivity.key);
+      if (this.elementExists(competence, courseActivity.competences) && !this.elementExists(courseActivity, this.student.activities)) {
         this.student.activities.push(courseActivity);
+        this.studentService.updateStudent(this.student)
+          .then(course => {
+            console.log('OK');
+          })
+          .catch(error => {
+            console.error('Error in get Course', error);
+          });;
+        return courseActivity;
       }
     }
+  }
 
-    return activity;
+  // TODO: move to shared module
+  public elementExists<T extends Competence | Activity>(element: T, elementArray: T[]): boolean {
+    for (let arrayElement of elementArray) {
+      if (element.id === arrayElement.id) {
+        return true;
+      }
+    }
+    return false;
   }
 }

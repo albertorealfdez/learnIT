@@ -1,9 +1,9 @@
-<main class="course-page" *ngIf="course">
+<main class="course" *ngIf="course">
   <h2>{{course.name}}</h2>
-  <section class="course-page__competences">
+  <section class="course__competences">
     <h3>Mapa</h3>
     <ul>
-      <li *ngFor="let competence of course.competences" (click)="checkCompetence(competence)">
+      <li class="course__competences__competence course__competences__competence--unlocked" *ngFor="let competence of course.competences" (click)="checkCompetence(competence)">
         {{competence.key}}
       </li>
     </ul>

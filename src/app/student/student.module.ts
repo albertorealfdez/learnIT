@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { CourseService } from '../course/course.service';
 import { StudentComponent } from './student.component';
 import { StudentRoutingModule } from './student-routing.module';
-import { CourseService } from '../course/course.service';
+import { StudentService } from './student.service';
 
 @NgModule({
   imports: [
@@ -13,7 +14,7 @@ import { CourseService } from '../course/course.service';
   declarations: [
     StudentComponent
   ],
-  providers: [ CourseService ]
+  providers: [ CourseService, StudentService ]
 })
 
 export class StudentModule { }
