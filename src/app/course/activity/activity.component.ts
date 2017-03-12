@@ -42,7 +42,7 @@ export class ActivityComponent implements OnInit {
     // TODO: use a service
     if (this.selectedAnswer === 2) {
       console.log('Correct');
-      this.router.navigate(['course', 1]);
+      window.history.back(); // TODO: change to current course page
     } else {
       console.log('Incorrect');
     }
