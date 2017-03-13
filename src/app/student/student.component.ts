@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Student } from './student.model';
+import {
+  Student,
+  StudentService
+} from './';
 import { CourseService } from '../course/course.service';
 
 @Component({
@@ -12,20 +15,21 @@ import { CourseService } from '../course/course.service';
 export class StudentComponent implements OnInit {
   public student: Student;
 
-  constructor(private courseService: CourseService) { }
+  constructor(
+    private courseService: CourseService,
+    private studentService: StudentService
+  ) { }
 
   ngOnInit() {
-    this.student = new Student(1, 'Alberto', 'albertorealfdez@gmail.com');
-
-    this.courseService.getCourses()
-      .then(courses => {
-        if (courses) {
-          this.student.courses = courses;
+    this.studentService.getStudent(JSON.parse(sessionStorage.getItem('user')))
+      .then(student => {
+        if (student) {
+          this.student = new Student(student.id, student.name, student.email, student.courses, student.activities, student.map); // TODO: check Object.assign
         }
+        console.log(this.student);
       })
       .catch(error => {
-        console.error('Error in get Courses', error);
+        console.error('Error in get Course', error);
       });
   }
-
 }

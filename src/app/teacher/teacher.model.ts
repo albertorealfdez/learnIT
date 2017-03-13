@@ -6,7 +6,7 @@ export class Teacher extends User {
         name: string,
         email: string
     ) {
-        super(id, name, email);
+        super(id, name, email, []);
         // TODO: check why twice
         this.id = id;
         this.name = name;

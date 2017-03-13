@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
     this.userService.getUserByEmail(this.userLogin.email)
       .then(user => {
         if (user.password === this.userLogin.password) {
+          sessionStorage.setItem('user', user.id.toString()); // Temporal session
           if (user.type === 0) {
             this.router.navigate(['/teacher']);
           } else {

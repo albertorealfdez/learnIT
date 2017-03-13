@@ -11,7 +11,8 @@ export class User {
   constructor(
       id: number,
       name: string,
-      email: string
+      email: string,
+      courses: Course[]
   ) {}
 }
 

@@ -1,3 +1,4 @@
+import { StudentCompetence } from '../student/student-competence.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -33,15 +34,18 @@ export class CourseComponent implements OnInit {
 
   ngOnInit() {
     // TODO: change to current student
-    this.studentService.getStudent(1)
+    this.studentService.getStudent(JSON.parse(sessionStorage.getItem('user')))
       .then(student => {
         if (student) {
-          this.student = student; // TODO: check Object.assign
+          this.student = new Student(student.id, student.name, student.email, student.courses, student.activities, student.map); // TODO: check Object.assign
         }
+        console.log(this.student);
       })
       .catch(error => {
         console.error('Error in get Course', error);
       });
+
+    console.log(this.student);
 
     this.getCurrentCourse();
   }
@@ -60,7 +64,7 @@ export class CourseComponent implements OnInit {
       });
   }
 
-  public checkCompetence(compentece: Competence): void {
+  public checkCompetence(compentece: StudentCompetence): void {
     let activity: Activity = this.getNextActivity(compentece);
 
     if (activity) {
@@ -69,7 +73,7 @@ export class CourseComponent implements OnInit {
   }
 
   // TODO: change to selection service
-  public getNextActivity(competence: Competence): Activity {
+  public getNextActivity(competence: StudentCompetence): Activity {
     for (let courseActivity of this.course.activities) {
       if (this.elementExists(competence, courseActivity.competences) && !this.elementExists(courseActivity, this.student.activities)) {
         this.student.activities.push(courseActivity);
@@ -78,7 +82,7 @@ export class CourseComponent implements OnInit {
             console.log('OK');
           })
           .catch(error => {
-            console.error('Error in get Course', error);
+            console.error('Error in update student', error);
           });;
         return courseActivity;
       }
@@ -86,7 +90,7 @@ export class CourseComponent implements OnInit {
   }
 
   // TODO: move to shared module
-  public elementExists<T extends Competence | Activity>(element: T, elementArray: T[]): boolean {
+  public elementExists<T extends Competence | StudentCompetence | Activity>(element: T, elementArray: T[]): boolean {
     for (let arrayElement of elementArray) {
       if (element.id === arrayElement.id) {
         return true;
