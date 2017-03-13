@@ -3,18 +3,25 @@
     &__competence {
       cursor: pointer;
       list-style: none;
-      display: inline-block;
-      padding: 10px;
+      display: inline-block;     
       margin-right: 10px;
-      border-radius: 100%;     
+    }
+
+    &__competence p {
+      padding: 10px;
+      border-radius: 100%;
     }
 
     &__competence--locked {
-        background-color: green;
+        background-color: grey;
     }
 
     &__competence--unlocked {
-      background-color: grey;
+      background-color: yellow;
+    }
+
+    &__competence--completed {
+      background-color: green;
     }
   }
 }

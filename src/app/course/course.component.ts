@@ -11,7 +11,8 @@ import { Competence } from '../shared/competence.model';
 import { Activity } from '../shared/activity.model';
 import {
   Student,
-  StudentService
+  StudentService,
+  StudentMap
 } from '../student';
 
 @Component({
@@ -33,20 +34,6 @@ export class CourseComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // TODO: change to current student
-    this.studentService.getStudent(JSON.parse(sessionStorage.getItem('user')))
-      .then(student => {
-        if (student) {
-          this.student = new Student(student.id, student.name, student.email, student.courses, student.activities, student.map); // TODO: check Object.assign
-        }
-        console.log(this.student);
-      })
-      .catch(error => {
-        console.error('Error in get Course', error);
-      });
-
-    console.log(this.student);
-
     this.getCurrentCourse();
   }
 
@@ -57,7 +44,28 @@ export class CourseComponent implements OnInit {
       .then(course => {
         if (course) {
           this.course = course; // TODO: check Object.assign
+          this.getCurrentStudent();
         }
+      })
+      .catch(error => {
+        console.error('Error in get Course', error);
+      });
+  }
+
+  public getCurrentStudent(): void {
+    // TODO: change to current student
+    this.studentService.getStudent(JSON.parse(sessionStorage.getItem('user')))
+      .then(student => {
+        if (student) {
+          this.student = new Student(student.id, student.name, student.email, student.courses, student.activities, student.map); // TODO: check Object.assign
+
+          // TODO: change this obtention
+          if (!this.student.map.competences.length) {
+            this.student.map = new StudentMap(this.course.competences);
+          }
+          this.student.map.competences[0].unlocked = true;
+        }
+        console.log(this.student);
       })
       .catch(error => {
         console.error('Error in get Course', error);

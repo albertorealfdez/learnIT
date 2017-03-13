@@ -21,6 +21,7 @@ export class StudentComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // TODO: change to current student
     this.studentService.getStudent(JSON.parse(sessionStorage.getItem('user')))
       .then(student => {
         if (student) {

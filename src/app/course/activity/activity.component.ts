@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { Activity } from '../../shared/activity.model';
 import { ActivityService } from './activity.service';
+import { Student, StudentService } from '../../student';
 
 @Component({
   selector: 'app-activity',
@@ -13,15 +14,30 @@ import { ActivityService } from './activity.service';
 export class ActivityComponent implements OnInit {
   public activity: Activity;
   public selectedAnswer: number;
+  public wrongAnswer: boolean;
+  public student: Student;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private activityService: ActivityService,
+    private studentService: StudentService
   ) {}
 
   ngOnInit() {
     this.getCurrentActivity();
+    
+    // TODO: change to current student
+    this.studentService.getStudent(JSON.parse(sessionStorage.getItem('user')))
+      .then(student => {
+        if (student) {
+          this.student = new Student(student.id, student.name, student.email, student.courses, student.activities, student.map); // TODO: check Object.assign
+        }
+        console.log(this.student);
+      })
+      .catch(error => {
+        console.error('Error in get Course', error);
+      });
   }
 
   public getCurrentActivity(): void {
@@ -38,13 +54,39 @@ export class ActivityComponent implements OnInit {
       });
   }
 
-  public sendAnswer() {
+  public sendAnswer(): void {
     // TODO: use a service
     if (this.selectedAnswer === 2) {
       console.log('Correct');
-      window.history.back(); // TODO: change to current course page
+      this.updateCompetences();
+
+      this.studentService.updateStudent(this.student)
+          .then(course => {
+            window.history.back(); // TODO: change to current course page
+          })
+          .catch(error => {
+            console.error('Error in update student', error);
+          });
     } else {
       console.log('Incorrect');
+      this.wrongAnswer = true;
+    }
+  }
+
+  public updateCompetences(): void {
+    for (let activityCompetence of this.activity.competences) {
+      for (let competence of this.student.map.competences) {
+        if (activityCompetence.id === competence.id) {
+          competence.force += (this.activity.difficulty * 10);
+          if (competence.force > 0) {
+            competence.unlocked = true;
+          }
+
+          if (competence.force >= competence.threshold) {
+            competence.completed = true;
+          }
+        }
+      }
     }
   }
 }
