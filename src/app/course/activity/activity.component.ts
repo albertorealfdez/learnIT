@@ -56,34 +56,34 @@ export class ActivityComponent implements OnInit {
 
   public sendAnswer(): void {
     // TODO: use a service
-    if (this.selectedAnswer === 2) {
-      console.log('Correct');
-      this.updateCompetences();
+    this.updateCompetences(this.selectedAnswer === 2);
 
-      this.studentService.updateStudent(this.student)
-          .then(course => {
-            window.history.back(); // TODO: change to current course page
-          })
-          .catch(error => {
-            console.error('Error in update student', error);
-          });
-    } else {
-      console.log('Incorrect');
-      this.wrongAnswer = true;
-    }
+    this.studentService.updateStudent(this.student)
+        .then(course => {
+          window.history.back(); // TODO: change to current course page
+        })
+        .catch(error => {
+          console.error('Error in update student', error);
+        });
   }
 
-  public updateCompetences(): void {
+  public updateCompetences(isCorrect: boolean): void {
     for (let activityCompetence of this.activity.competences) {
       for (let competence of this.student.map.competences) {
         if (activityCompetence.id === competence.id) {
-          competence.force += (this.activity.difficulty * 10);
+          if (isCorrect) {
+            competence.force += (this.activity.difficulty * 10);
+          } else {
+            competence.force -= (this.activity.difficulty * 10);
+          }
           if (competence.force > 0) {
             competence.unlocked = true;
           }
 
           if (competence.force >= competence.threshold) {
             competence.completed = true;
+          } else {
+            competence.completed = false;
           }
         }
       }
