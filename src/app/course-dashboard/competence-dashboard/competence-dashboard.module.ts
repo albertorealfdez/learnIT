@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
 import {
@@ -10,7 +9,6 @@ import {
 
 @NgModule({
   imports: [
-    BrowserModule,
     FormsModule,
     CommonModule
   ],

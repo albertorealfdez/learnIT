@@ -1,5 +1,5 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 
 import { CourseService } from '../course/course.service';
 import { StudentComponent } from './student.component';
@@ -8,7 +8,7 @@ import { StudentService } from './student.service';
 
 @NgModule({
   imports: [
-    BrowserModule,
+    CommonModule,
     StudentRoutingModule
   ],
   declarations: [

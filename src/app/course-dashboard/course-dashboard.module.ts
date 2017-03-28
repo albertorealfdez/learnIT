@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { CourseDashboardRoutingModule } from './course-dashboard-routing.module';
@@ -13,7 +13,7 @@ import { ActivityDashboardModule } from './activity-dashboard/activity-dashboard
 
 @NgModule({
   imports: [
-    BrowserModule,
+    CommonModule,
     FormsModule,
     CourseDashboardRoutingModule,
     CompetenceModule,
