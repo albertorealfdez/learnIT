@@ -1,6 +1,6 @@
 export class Competence {
   public id: number;
   public key: string;
-  public name: string;
+  public title: string;
   public threshold: number;
 }

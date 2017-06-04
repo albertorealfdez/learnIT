@@ -4,7 +4,7 @@ import { Http } from '@angular/http';
 import { Activity } from '../../shared/activity.model';
 
 @Injectable()
-export class ActivityService {
+export class DashboardActivityService {
   private activityUrl = 'api/activities';
 
   constructor(private http: Http) { }

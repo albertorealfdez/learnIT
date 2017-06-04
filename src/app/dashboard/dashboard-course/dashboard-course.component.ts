@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { CourseService } from './';
-import { Competence } from '../shared/competence.model';
-import { Course } from '../course/course.model';
+import { DashboardCourseService } from './';
+import { Competence } from '../../shared/competence.model';
+import { Course } from '../../course/course.model';
 
 @Component({
   selector: 'app-course',
-  templateUrl: './course-dashboard.component.html',
-  styleUrls: ['./course-dashboard.component.scss']
+  templateUrl: './dashboard-course.component.html',
+  styleUrls: ['./dashboard-course.component.scss']
 })
 
-export class CourseDashboardComponent implements OnInit {
+export class DashboardCourseComponent implements OnInit {
   public course: Course;
   public showNewCompetence: boolean;
 
   constructor(
-    private courseService: CourseService,
+    private courseService: DashboardCourseService,
     private route: ActivatedRoute
   ) {}
 
@@ -25,9 +25,9 @@ export class CourseDashboardComponent implements OnInit {
   }
 
   public getCurrentCourse(): void {
-    let courseId: number = this.route.snapshot.params['id'];
+    let courseKey: string = this.route.snapshot.params['key'];
 
-    this.courseService.getCourse(courseId)
+    this.courseService.getCourseByKey(courseKey)
       .then(course => {
         if (course) {
           this.course = course;

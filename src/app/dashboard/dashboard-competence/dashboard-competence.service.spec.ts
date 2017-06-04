@@ -1,16 +1,16 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { CompetenceService } from './competence.service';
+import { DashboardCompetenceService } from './dashboard-competence.service';
 
 describe('CompetenceService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [CompetenceService]
+      providers: [DashboardCompetenceService]
     });
   });
 
-  it('should ...', inject([CompetenceService], (service: CompetenceService) => {
+  it('should ...', inject([DashboardCompetenceService], (service: DashboardCompetenceService) => {
     expect(service).toBeTruthy();
   }));
 });

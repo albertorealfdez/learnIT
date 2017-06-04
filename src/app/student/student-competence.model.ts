@@ -10,7 +10,7 @@ export class StudentCompetence extends Competence {
         super();
         this.id = competence.id;
         this.key = competence.key;
-        this.name = competence.name;
+        this.title = competence.title;
         this.threshold = competence.threshold;
 
         this.force = 0;

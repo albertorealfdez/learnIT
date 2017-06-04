@@ -1,20 +1,20 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { Competence } from '../../shared/competence.model';
-import { CompetenceService } from './competence.service';
+import { DashboardCompetenceService } from './dashboard-competence.service';
 
 @Component({
-  selector: 'app-competence',
-  templateUrl: './competence-dashboard.component.html',
-  styleUrls: ['./competence-dashboard.component.scss']
+  selector: 'app-dashboard-competence',
+  templateUrl: './dashboard-competence.component.html',
+  styleUrls: ['./dashboard-competence.component.scss']
 })
 
-export class CompetenceComponent implements OnInit {
+export class DashboardCompetenceComponent implements OnInit {
   public requestLoading: boolean;
 
   @Input() competence: Competence;
 
-  constructor(private competenceService: CompetenceService) { }
+  constructor(private competenceService: DashboardCompetenceService) { }
 
   ngOnInit() {
   }

@@ -1,27 +1,27 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Activity } from '../../shared/activity.model';
 import { Competence } from '../../shared/competence.model';
-import { ActivityService } from './activity.service';
+import { DashboardActivityService } from './dashboard-activity.service';
 import {
-  CompetenceService
-} from '../competence-dashboard';
+  DashboardCompetenceService
+} from '../dashboard-competence';
 
 @Component({
   selector: 'app-activity',
-  templateUrl: './activity-dashboard.component.html',
-  styleUrls: ['./activity-dashboard.component.scss']
+  templateUrl: './dashboard-activity.component.html',
+  styleUrls: ['./dashboard-activity.component.scss']
 })
 
-export class ActivityDashboardComponent implements OnInit {
+export class DashboardActivityComponent implements OnInit {
   public activity: Activity;
   public currentCompetences: Competence[];
   public selectedCompetence: number;
 
   constructor(
-    private activityService: ActivityService,
-    private competenceService: CompetenceService,
+    private activityService: DashboardActivityService,
+    private competenceService: DashboardCompetenceService,
     private route: ActivatedRoute
   ) {}
 

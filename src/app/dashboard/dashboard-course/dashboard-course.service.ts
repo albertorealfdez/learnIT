@@ -3,10 +3,10 @@ import { Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { Course } from '../course/course.model';
+import { Course } from '../../course/course.model';
 
 @Injectable()
-export class CourseService {
+export class DashboardCourseService {
   private coursesUrl = 'api/courses';
 
   constructor(private http: Http) { }
@@ -27,6 +27,17 @@ export class CourseService {
       .toPromise()
       .then(response => {
         return response.json().data as Course;
+      })
+      .catch(this.handleError);
+  }
+
+  public getCourseByKey(key: string): Promise<Course> {
+    const url = `${this.coursesUrl}?key=${key}`;
+
+    return this.http.get(url)
+      .toPromise()
+      .then(response => {
+        return response.json().data[0] as Course;
       })
       .catch(this.handleError);
   }

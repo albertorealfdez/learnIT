@@ -4,7 +4,7 @@ import { Http } from '@angular/http';
 import { Competence } from '../../shared/competence.model';
 
 @Injectable()
-export class CompetenceService {
+export class DashboardCompetenceService {
   private competenceUrl = 'api/competences';
 
   constructor(private http: Http) { }
@@ -44,7 +44,7 @@ export class CompetenceService {
 
   public updateCompetence(competence: Competence): Promise<Competence> {
     const url = `${this.competenceUrl}/${competence.id}`;
-    console.log('HERE: ', competence, url);
+
     return this.http.put(url, competence)
       .toPromise()
       .then(response => {
