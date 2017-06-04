@@ -38,9 +38,9 @@ export class CourseComponent implements OnInit {
   }
 
   public getCurrentCourse(): void {
-    let courseId: number = this.activatedRoute.snapshot.params['id'];
+    let courseKey: string = this.activatedRoute.snapshot.params['key'];
 
-    this.courseService.getCourse(courseId)
+    this.courseService.getCourseByKey(courseKey)
       .then(course => {
         if (course) {
           this.course = course; // TODO: check Object.assign
@@ -63,9 +63,8 @@ export class CourseComponent implements OnInit {
           if (!this.student.map.competences.length) {
             this.student.map = new StudentMap(this.course.competences);
           }
-          this.student.map.competences[0].unlocked = true;
+          this.student.map.competences[0].unlocked = true; // TODO: automatically
         }
-        console.log(this.student);
       })
       .catch(error => {
         console.error('Error in get Course', error);
@@ -91,7 +90,7 @@ export class CourseComponent implements OnInit {
           })
           .catch(error => {
             console.error('Error in update student', error);
-          });;
+          });
         return courseActivity;
       }
     }

@@ -3,7 +3,7 @@
   <section class="student-page__courses">
     <ul>
       <li *ngFor="let course of student.courses">
-        <a routerLink="/course/{{course.id}}">{{course.name}}</a>
+        <a routerLink="/course/{{course.key}}">{{course.name}}</a>
       </li>
     </ul>
   </section>

@@ -6,7 +6,7 @@ import { ActivityComponent } from './activity/activity.component';
 
 const courseRoutes: Routes = [
   {
-    path: 'course/:id',
+    path: 'course/:key',
     component: CourseComponent
   },
   {

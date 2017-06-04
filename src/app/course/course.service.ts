@@ -31,6 +31,17 @@ export class CourseService {
       .catch(this.handleError);
   }
 
+  public getCourseByKey(key: string): Promise<Course> {
+    const url = `${this.coursesUrl}?key=${key}`;
+
+    return this.http.get(url)
+      .toPromise()
+      .then(response => {
+        return response.json().data[0] as Course;
+      })
+      .catch(this.handleError);
+  }
+
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
