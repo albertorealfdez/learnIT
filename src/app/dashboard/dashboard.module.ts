@@ -1,19 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { TeacherComponent } from './teacher.component';
-import { TeacherRoutingModule } from './teacher-routing.module';
+import { DashboardComponent } from './dashboard.component';
+import { DashboardRoutingModule } from './dashboard-routing.module';
 import { CourseService } from '../course/course.service';
 
 @NgModule({
   imports: [
     CommonModule,
-    TeacherRoutingModule
+    DashboardRoutingModule
   ],
   declarations: [
-    TeacherComponent
+    DashboardComponent
   ],
   providers: [ CourseService ]
 })
 
-export class TeacherModule { }
+export class DashboardModule { }

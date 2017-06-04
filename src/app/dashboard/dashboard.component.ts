@@ -5,17 +5,17 @@ import { CourseService } from '../course/course.service';
 
 @Component({
   selector: 'app-teacher',
-  templateUrl: './teacher.component.html',
-  styleUrls: ['./teacher.component.scss']
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss']
 })
 
-export class TeacherComponent implements OnInit {
+export class DashboardComponent implements OnInit {
   public teacher: Teacher;
 
   constructor(private courseService: CourseService) { }
 
   ngOnInit() {
-    this.teacher = new Teacher(1, 'Alberto', 'albertorealfdez@gmail.com');
+    this.teacher = new Teacher(1, 'Alberto', 'albertorealfdez@gmail.com'); // TODO: Change
     this.courseService.getCourses()
       .then(courses => {
         if (courses) {
