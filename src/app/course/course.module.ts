@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 
+import { SharedModule } from '../shared/shared.module';
 import { CourseRoutingModule } from './course-routing.module';
 import {
   CourseComponent,
@@ -15,21 +14,17 @@ import { CompetenceService } from './competence/competence.service';
 import { ActivityService } from './activity/activity.service';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    CourseRoutingModule,
-  ],
+  imports: [ CourseRoutingModule, SharedModule ],
   declarations: [
     CourseComponent,
     CompetenceComponent,
     ActivityComponent
   ],
-    providers: [
-      CourseService,
-      CompetenceService,
-      ActivityService
-    ]
+  providers: [
+    CourseService,
+    CompetenceService,
+    ActivityService
+  ]
 })
 
 export class CourseModule { }

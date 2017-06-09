@@ -9,7 +9,7 @@ export class DashboardActivityService {
 
   constructor(private http: Http) { }
 
-  public getAllCompetences(): Promise<Activity[]> {
+  public getAllActivities(): Promise<Activity[]> {
     const url = `${this.activityUrl}`;
 
     return this.http.get(url)

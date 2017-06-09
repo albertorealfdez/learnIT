@@ -9,7 +9,7 @@ export class ActivityService {
 
   constructor(private http: Http) { }
 
-  public getAllCompetences(): Promise<Activity[]> {
+  public getAllActivities(): Promise<Activity[]> {
     const url = `${this.activityUrl}`;
 
     return this.http.get(url)
@@ -27,17 +27,6 @@ export class ActivityService {
       .toPromise()
       .then(response => {
         return response.json().data as Activity;
-      })
-      .catch(this.handleError);
-  }
-
-  public updateActivity(activity: Activity): Promise<Activity> {
-    const url = `${this.activityUrl}/${activity.id}`;
-
-    return this.http.put(url, activity)
-      .toPromise()
-      .then(response => {
-        return response;
       })
       .catch(this.handleError);
   }

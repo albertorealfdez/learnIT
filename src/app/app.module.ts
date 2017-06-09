@@ -7,13 +7,13 @@ import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from './in-memory-data.service';
 
 // App modules
+import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderModule } from './header/header.module';
 import { HomeModule } from './home/home.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { StudentModule } from './student/student.module';
 import { CourseModule } from './course/course.module';
-import { CourseDashboardModule } from './course-dashboard/course-dashboard.module';
 
 // App components
 import { AppComponent } from './app.component';
@@ -23,17 +23,15 @@ import { AppComponent } from './app.component';
     BrowserModule, // Angular modules
     HttpModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService), // App modules
+    CoreModule,
     AppRoutingModule,
     HeaderModule,
     HomeModule,
     DashboardModule,
     StudentModule,
-    CourseModule,
-    CourseDashboardModule
+    CourseModule
   ],
-  declarations: [
-    AppComponent
-  ],
+  declarations: [ AppComponent ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
