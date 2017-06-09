@@ -1,5 +1,5 @@
-import { Competence } from '../shared/competence.model';
-import { StudentCompetence } from './student-competence.model';
+import { Competence } from '../../shared/competence.model';
+import { StudentCompetence } from '../student-competence.model';
 
 export class StudentMap {
     public competences: StudentCompetence[];

@@ -1,4 +1,4 @@
-import { StudentMap } from './student-map.model';
+import { StudentMap } from './student-map/student-map.model';
 import { User } from '../shared/user.model';
 import { Activity } from '../shared/activity.model';
 import { Course } from '../course';

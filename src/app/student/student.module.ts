@@ -5,6 +5,7 @@ import { CourseService } from '../course/course.service';
 import { StudentComponent } from './student.component';
 import { StudentRoutingModule } from './student-routing.module';
 import { StudentService } from './student.service';
+import { StudentMapComponent } from './student-map/student-map.component';
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import { StudentService } from './student.service';
     StudentRoutingModule
   ],
   declarations: [
-    StudentComponent
+    StudentComponent,
+    StudentMapComponent
   ],
   providers: [ CourseService, StudentService ]
 })
