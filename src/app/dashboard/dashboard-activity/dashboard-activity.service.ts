@@ -9,24 +9,13 @@ export class DashboardActivityService {
 
   constructor(private http: Http) { }
 
-  public getAllActivities(): Promise<Activity[]> {
+  public createActivity(activity: Activity): Promise<Activity> {
     const url = `${this.activityUrl}`;
 
-    return this.http.get(url)
+    return this.http.post(url, activity)
       .toPromise()
       .then(response => {
-        return response.json().data as Activity[];
-      })
-      .catch(this.handleError);
-  }
-
-  public getActivity(id: number): Promise<Activity> {
-    const url = `${this.activityUrl}/${id}`;
-
-    return this.http.get(url)
-      .toPromise()
-      .then(response => {
-        return response.json().data as Activity;
+        return response;
       })
       .catch(this.handleError);
   }

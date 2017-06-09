@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Activity } from '../../shared/activity.model';
 import { Competence } from '../../shared/competence.model';
 import { DashboardActivityService } from './dashboard-activity.service';
+import { ActivityService } from '../../shared/activity.service';
 import {
   DashboardCompetenceService
 } from '../dashboard-competence';
@@ -20,7 +21,8 @@ export class DashboardActivityComponent implements OnInit {
   public selectedCompetence: number;
 
   constructor(
-    private activityService: DashboardActivityService,
+    private dashboardActivityService: DashboardActivityService,
+    private activityService: ActivityService,
     private competenceService: DashboardCompetenceService,
     private route: ActivatedRoute
   ) {}
@@ -61,14 +63,13 @@ export class DashboardActivityComponent implements OnInit {
 
   public addCompetence() {
     if (this.selectedCompetence) {
-      console.log('Adding: ', this.selectedCompetence);
+      console.log('Adding competence: ', this.selectedCompetence);
     }
   }
 
   public createOrUpdateactivity() {
-    this.activityService.updateActivity(this.activity)
+    this.dashboardActivityService.updateActivity(this.activity)
     .then(competence => {
-        console.log('Updated');
       })
       .catch(error => {
         console.error('Error in updateActivity', error);

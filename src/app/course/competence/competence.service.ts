@@ -44,7 +44,6 @@ export class CompetenceService {
 
   public updateCompetence(competence: Competence): Promise<Competence> {
     const url = `${this.competenceUrl}/${competence.id}`;
-    console.log('HERE: ', competence, url);
     return this.http.put(url, competence)
       .toPromise()
       .then(response => {

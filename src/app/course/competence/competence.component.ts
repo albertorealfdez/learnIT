@@ -32,7 +32,6 @@ export class CompetenceComponent implements OnInit {
 
     this.competenceService.createCompetence(this.competence)
     .then(competence => {
-        console.log('Created');
         this.requestLoading = false;
       })
       .catch(error => {
@@ -45,7 +44,6 @@ export class CompetenceComponent implements OnInit {
 
     this.competenceService.updateCompetence(this.competence)
     .then(competence => {
-        console.log('Updated');
         this.requestLoading = false;
       })
       .catch(error => {

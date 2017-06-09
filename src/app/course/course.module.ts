@@ -11,10 +11,10 @@ import { CompetenceComponent } from './competence/competence.component';
 import { ActivityComponent } from './activity/activity.component';
 
 import { CompetenceService } from './competence/competence.service';
-import { ActivityService } from './activity/activity.service';
+import { CourseActivityService } from './activity/activity.service';
 
 @NgModule({
-  imports: [ CourseRoutingModule, SharedModule ],
+  imports: [ SharedModule, CourseRoutingModule ],
   declarations: [
     CourseComponent,
     CompetenceComponent,
@@ -23,7 +23,7 @@ import { ActivityService } from './activity/activity.service';
   providers: [
     CourseService,
     CompetenceService,
-    ActivityService
+    CourseActivityService
   ]
 })
 

@@ -27,7 +27,6 @@ export class StudentComponent implements OnInit {
         if (student) {
           this.student = new Student(student.id, student.name, student.email, student.courses, student.activities, student.map); // TODO: check Object.assign
         }
-        console.log(this.student);
       })
       .catch(error => {
         console.error('Error in get Course', error);

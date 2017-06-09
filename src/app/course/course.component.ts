@@ -86,7 +86,6 @@ export class CourseComponent implements OnInit {
         this.student.activities.push(courseActivity);
         this.studentService.updateStudent(this.student)
           .then(course => {
-            console.log('OK');
           })
           .catch(error => {
             console.error('Error in update student', error);
