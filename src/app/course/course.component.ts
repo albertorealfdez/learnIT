@@ -6,7 +6,6 @@ import {
   CourseService
 } from './';
 
-import { Competence } from '../shared/competence/competence.model';
 import { StudentCompetence } from '../shared/competence/student-competence.model';
 import { Activity } from '../shared/activity/activity.model';
 import {
@@ -14,6 +13,7 @@ import {
   StudentService,
   StudentMap
 } from '../student';
+import { SelectionEngineService } from '../selection-engine/selection-engine.service';
 
 @Component({
   selector: 'app-course',
@@ -30,7 +30,8 @@ export class CourseComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private courseService: CourseService,
-    private studentService: StudentService
+    private studentService: StudentService,
+    private selectionService: SelectionEngineService
   ) {}
 
   ngOnInit() {
@@ -74,36 +75,10 @@ export class CourseComponent implements OnInit {
   }
 
   public checkCompetence(compentece: StudentCompetence): void {
-    let activity: Activity = this.getNextActivity(compentece);
+    let activity: Activity = this.selectionService.getNextActivity(this.student, this.course, compentece);
 
     if (activity) {
       this.router.navigate(['activity', activity.id]);
     }
-  }
-
-  // TODO: change to selection service
-  public getNextActivity(competence: StudentCompetence): Activity {
-    for (let courseActivity of this.course.activities) {
-      if (this.elementExists(competence, courseActivity.competences) && !this.elementExists(courseActivity, this.student.activities)) {
-        this.student.activities.push(courseActivity);
-        this.studentService.updateStudent(this.student)
-          .then(course => {
-          })
-          .catch(error => {
-            console.error('Error in update student', error);
-          });
-        return courseActivity;
-      }
-    }
-  }
-
-  // TODO: move to shared module
-  public elementExists<T extends Competence | StudentCompetence | Activity>(element: T, elementArray: T[]): boolean {
-    for (let arrayElement of elementArray) {
-      if (element.id === arrayElement.id) {
-        return true;
-      }
-    }
-    return false;
   }
 }

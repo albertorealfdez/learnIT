@@ -9,9 +9,9 @@ import {
 
 import { CompetenceComponent } from './competence/competence.component';
 import { ActivityComponent } from './activity/activity.component';
-
 import { CompetenceService } from './competence/competence.service';
 import { CourseActivityService } from './activity/activity.service';
+import { SelectionEngineService } from '../selection-engine/selection-engine.service';
 
 @NgModule({
   imports: [ SharedModule, CourseRoutingModule ],
@@ -23,7 +23,8 @@ import { CourseActivityService } from './activity/activity.service';
   providers: [
     CourseService,
     CompetenceService,
-    CourseActivityService
+    CourseActivityService,
+    SelectionEngineService
   ]
 })
 
