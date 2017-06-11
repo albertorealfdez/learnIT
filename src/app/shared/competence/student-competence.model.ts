@@ -1,4 +1,4 @@
-import { Competence } from '../shared/competence.model';
+import { Competence } from '../competence/competence.model';
 
 export class StudentCompetence extends Competence {
     public force: number;

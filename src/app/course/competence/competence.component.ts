@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Competence } from '../../shared/competence.model';
+import { Competence } from '../../shared/competence/competence.model';
 import { CompetenceService } from './competence.service';
 
 @Component({

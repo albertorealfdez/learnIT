@@ -1,5 +1,5 @@
-import { Competence } from '../shared/competence.model';
-import { Activity } from '../shared/activity.model';
+import { Competence } from '../shared/competence/competence.model';
+import { Activity } from '../shared/activity/activity.model';
 
 export class Course {
   public id: number;

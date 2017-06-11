@@ -1,6 +1,6 @@
 import { StudentMap } from './student-map/student-map.model';
 import { User } from '../shared/user.model';
-import { Activity } from '../shared/activity.model';
+import { Activity } from '../shared/activity/activity.model';
 import { Course } from '../course';
 
 export class Student extends User {

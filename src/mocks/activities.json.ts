@@ -1,5 +1,5 @@
 import { COMPETENCES1, COMPETENCES2 } from './competences.json';
-import { Activity } from '../app/shared/activity.model';
+import { Activity } from '../app/shared/activity/activity.model';
 
 export let ANSWERS: Object[] = [
   { id: 1, text: 'a) Verdadero'},

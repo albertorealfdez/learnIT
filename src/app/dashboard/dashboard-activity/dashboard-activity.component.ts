@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Activity } from '../../shared/activity.model';
-import { Competence } from '../../shared/competence.model';
+import { Activity } from '../../shared/activity/activity.model';
+import { Competence } from '../../shared/competence/competence.model';
 import { DashboardActivityService } from './dashboard-activity.service';
-import { ActivityService } from '../../shared/activity.service';
+import { ActivityService } from '../../shared/activity/activity.service';
 import {
   DashboardCompetenceService
 } from '../dashboard-competence';
-import { CompetenceService } from '../../shared/competence.service';
+import { CompetenceService } from '../../shared/competence/competence.service';
 
 @Component({
   selector: 'app-activity',

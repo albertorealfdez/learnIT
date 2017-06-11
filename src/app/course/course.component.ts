@@ -1,4 +1,3 @@
-import { StudentCompetence } from '../student/student-competence.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -7,8 +6,9 @@ import {
   CourseService
 } from './';
 
-import { Competence } from '../shared/competence.model';
-import { Activity } from '../shared/activity.model';
+import { Competence } from '../shared/competence/competence.model';
+import { StudentCompetence } from '../shared/competence/student-competence.model';
+import { Activity } from '../shared/activity/activity.model';
 import {
   Student,
   StudentService,

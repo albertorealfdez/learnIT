@@ -1,4 +1,4 @@
-import { Competence } from '../app/shared/competence.model';
+import { Competence } from '../app/shared/competence/competence.model';
 
 export let COMPETENCES: Competence[] = [
   { id: 1, key: 'C1', title: 'Presente simple', threshold: 20 },

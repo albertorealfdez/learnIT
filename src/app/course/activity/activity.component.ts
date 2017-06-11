@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Activity } from '../../shared/activity.model';
-import { ActivityService } from '../../shared/activity.service';
+import { Activity } from '../../shared/activity/activity.model';
+import { ActivityService } from '../../shared/activity/activity.service';
 import { Student, StudentService } from '../../student';
 
 @Component({

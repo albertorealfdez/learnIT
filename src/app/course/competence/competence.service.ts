@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
 
-import { Competence } from '../../shared/competence.model';
+import { Competence } from '../../shared/competence/competence.model';
 
 @Injectable()
 export class CompetenceService {

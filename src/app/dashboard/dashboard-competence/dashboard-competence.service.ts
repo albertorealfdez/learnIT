@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
-import { Competence } from '../../shared/competence.model';
+import { Competence } from '../../shared/competence/competence.model';
 
 @Injectable()
 export class DashboardCompetenceService {

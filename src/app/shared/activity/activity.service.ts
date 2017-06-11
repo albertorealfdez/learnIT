@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
 
-import { Activity } from '../shared/activity.model';
+import { Activity } from './activity.model';
 
 @Injectable()
 export class ActivityService {
