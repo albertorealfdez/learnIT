@@ -43,14 +43,16 @@ export class ActivityComponent implements OnInit {
     let activityId: number = this.activatedRoute.snapshot.params['id'];
 
     this.activityService.getActivity(activityId)
-      .then(activity => {
-        if (activity) {
-          this.activity = activity;
+      .subscribe(
+        activity => {
+          if (activity) {
+            this.activity = activity;
+          }
+        },
+        error => {
+          console.error('Error in get activity', error);
         }
-      })
-      .catch(error => {
-        console.error('Error in get activity', error);
-      });
+      );
   }
 
   public sendAnswer(): void {

@@ -8,6 +8,7 @@ import { ActivityService } from '../../shared/activity.service';
 import {
   DashboardCompetenceService
 } from '../dashboard-competence';
+import { CompetenceService } from '../../shared/competence.service';
 
 @Component({
   selector: 'app-activity',
@@ -23,7 +24,8 @@ export class DashboardActivityComponent implements OnInit {
   constructor(
     private dashboardActivityService: DashboardActivityService,
     private activityService: ActivityService,
-    private competenceService: DashboardCompetenceService,
+    private dashboardCompetenceService: DashboardCompetenceService,
+    private competenceService: CompetenceService,
     private route: ActivatedRoute
   ) {}
 
@@ -38,26 +40,29 @@ export class DashboardActivityComponent implements OnInit {
     let activityId: number = this.route.snapshot.params['id'];
 
     this.activityService.getActivity(activityId)
-      .then(activity => {
-        if (activity) {
-          this.activity = activity;
+      .subscribe(
+        activity => {
+          if (activity) {
+            this.activity = activity;
+          }
+        },
+        error => {
+          console.error('Error in get activity', error);
         }
-      })
-      .catch(error => {
-        console.error('Error in get activity', error);
-      });
+      );
   }
 
   public getCurrentCompetences(): void {
     this.competenceService.getAllCompetences()
-      .then(competences => {
-        if (competences) {
-          this.currentCompetences = competences;
-          this.selectedCompetence = this.currentCompetences[0].id;
-        }
-      })
-      .catch(error => {
-        console.error('Error in get activity', error);
+      .subscribe(
+        competences => {
+          if (competences) {
+            this.currentCompetences = competences;
+            this.selectedCompetence = this.currentCompetences[0].id;
+          }
+        },
+        error => {
+          console.error('Error in get activity', error);
       });
   }
 
@@ -69,7 +74,7 @@ export class DashboardActivityComponent implements OnInit {
 
   public createOrUpdateactivity() {
     this.dashboardActivityService.updateActivity(this.activity)
-    .then(competence => {
+      .then(competence => {
       })
       .catch(error => {
         console.error('Error in updateActivity', error);

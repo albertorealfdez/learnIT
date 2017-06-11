@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
 
-import { Competence } from '../../shared/competence.model';
+import { Competence } from './competence.model';
 
 @Injectable()
 export class CompetenceService {
@@ -11,21 +11,22 @@ export class CompetenceService {
 
   constructor(private http: Http) { }
 
-  public createCompetence(competence: Competence): Observable<Competence> {
+  public getAllCompetences(): Observable<Competence[]> {
     const url = `${this.competenceUrl}`;
 
-    return this.http.post(url, competence)
+    return this.http.get(url)
       .map(response => {
-        return response;
+        return response.json().data as Competence[];
       })
       .catch(this.handleError);
   }
 
-  public updateCompetence(competence: Competence): Observable<Competence> {
-    const url = `${this.competenceUrl}/${competence.id}`;
-    return this.http.put(url, competence)
+  public getCompetence(id: number): Observable<Competence> {
+    const url = `${this.competenceUrl}/${id}`;
+
+    return this.http.get(url)
       .map(response => {
-        return response;
+        return response.json().data as Competence;
       })
       .catch(this.handleError);
   }

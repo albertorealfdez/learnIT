@@ -9,28 +9,6 @@ export class DashboardCompetenceService {
 
   constructor(private http: Http) { }
 
-  public getAllCompetences(): Promise<Competence[]> {
-    const url = `${this.competenceUrl}`;
-
-    return this.http.get(url)
-      .toPromise()
-      .then(response => {
-        return response.json().data as Competence[];
-      })
-      .catch(this.handleError);
-  }
-
-  public getCompetence(id: number): Promise<Competence> {
-    const url = `${this.competenceUrl}/${id}`;
-
-    return this.http.get(url)
-      .toPromise()
-      .then(response => {
-        return response.json().data as Competence;
-      })
-      .catch(this.handleError);
-  }
-
   public createCompetence(competence: Competence): Promise<Competence> {
     const url = `${this.competenceUrl}`;
 

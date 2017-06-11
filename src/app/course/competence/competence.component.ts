@@ -31,23 +31,26 @@ export class CompetenceComponent implements OnInit {
     this.requestLoading = true;
 
     this.competenceService.createCompetence(this.competence)
-    .then(competence => {
+    .subscribe(
+      competence => {
         this.requestLoading = false;
-      })
-      .catch(error => {
+      },
+      error => {
         console.error('Error in create competence', error);
-      });
+      }
+    );
   }
 
   public updateCompetence(): void {
     this.requestLoading = true;
 
     this.competenceService.updateCompetence(this.competence)
-    .then(competence => {
+    .subscribe(competence => {
         this.requestLoading = false;
-      })
-      .catch(error => {
+      },
+      error => {
         console.error('Error in updateCompetence', error);
-      });
+      }
+    );
   }
 }

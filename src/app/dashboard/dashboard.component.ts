@@ -17,14 +17,16 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.teacher = new Teacher(1, 'Alberto', 'albertorealfdez@gmail.com'); // TODO: Change
     this.courseService.getCourses()
-      .then(courses => {
-        if (courses) {
-          this.teacher.courses = courses;
+      .subscribe(
+        courses => {
+          if (courses) {
+            this.teacher.courses = courses;
+          }
+        },
+        error => {
+          console.error('Error in get Courses', error);
         }
-      })
-      .catch(error => {
-        console.error('Error in get Courses', error);
-      });
+      );
   }
 
 }

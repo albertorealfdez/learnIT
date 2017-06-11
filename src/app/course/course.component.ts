@@ -41,15 +41,17 @@ export class CourseComponent implements OnInit {
     let courseKey: string = this.activatedRoute.snapshot.params['key'];
 
     this.courseService.getCourseByKey(courseKey)
-      .then(course => {
-        if (course) {
-          this.course = course; // TODO: check Object.assign
-          this.getCurrentStudent();
-        }
-      })
-      .catch(error => {
+      .subscribe(
+        course => {
+          if (course) {
+            this.course = course; // TODO: check Object.assign
+            this.getCurrentStudent();
+          }
+        },
+        error => {
         console.error('Error in get Course', error);
-      });
+        }
+      );
   }
 
   public getCurrentStudent(): void {

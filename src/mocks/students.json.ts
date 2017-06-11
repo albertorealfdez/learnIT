@@ -1,4 +1,4 @@
-import { StudentMap } from '../app/student/student-map.model';
+import { StudentMap } from '../app/student/student-map/student-map.model';
 import { Student } from '../app/student/student.model';
 import { COURSES } from './courses.json';
 
