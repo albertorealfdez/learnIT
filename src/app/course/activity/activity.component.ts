@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Activity } from '../../shared/activity/activity.model';
 import { ActivityService } from '../../shared/activity/activity.service';
 import { Student, StudentService } from '../../student';
+import { SelectionEngineService } from '../../selection-engine/selection-engine.service';
 
 @Component({
   selector: 'app-activity',
@@ -21,7 +22,8 @@ export class ActivityComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private activityService: ActivityService,
-    private studentService: StudentService
+    private studentService: StudentService,
+    private selectionService: SelectionEngineService
   ) {}
 
   ngOnInit() {
@@ -57,7 +59,7 @@ export class ActivityComponent implements OnInit {
 
   public sendAnswer(): void {
     // TODO: use a service
-    this.updateCompetences(this.selectedAnswer === 2);
+    this.selectionService.updateCompetences(this.selectedAnswer, this.activity, this.student);
 
     this.studentService.updateStudent(this.student)
         .then(course => {
@@ -66,28 +68,5 @@ export class ActivityComponent implements OnInit {
         .catch(error => {
           console.error('Error in update student', error);
         });
-  }
-
-  public updateCompetences(isCorrect: boolean): void {
-    for (let activityCompetence of this.activity.competences) {
-      for (let competence of this.student.map.competences) {
-        if (activityCompetence.id === competence.id) {
-          if (isCorrect) {
-            competence.force += (this.activity.difficulty * 10);
-          } else {
-            competence.force -= (this.activity.difficulty * 10);
-          }
-          if (competence.force > 0) {
-            competence.unlocked = true;
-          }
-
-          if (competence.force >= competence.threshold) {
-            competence.completed = true;
-          } else {
-            competence.completed = false;
-          }
-        }
-      }
-    }
   }
 }

@@ -33,4 +33,29 @@ export class SelectionEngineService {
       }
     }
   }
+
+  public updateCompetences(answer: number, activity: Activity, student: Student): void {
+    let isCorrect = answer === 2; // TODO: change to real service call
+
+    for (let activityCompetence of activity.competences) {
+      for (let competence of student.map.competences) {
+        if (activityCompetence.id === competence.id) {
+          if (isCorrect) {
+            competence.force += (activity.difficulty * 10);
+          } else {
+            competence.force -= (activity.difficulty * 10);
+          }
+          if (competence.force > 0) {
+            competence.unlocked = true;
+          }
+
+          if (competence.force >= competence.threshold) {
+            competence.completed = true;
+          } else {
+            competence.completed = false;
+          }
+        }
+      }
+    }
+  }
 }
