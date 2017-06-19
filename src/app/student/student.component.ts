@@ -23,12 +23,12 @@ export class StudentComponent implements OnInit {
   ngOnInit() {
     // TODO: change to current student
     this.studentService.getStudent(JSON.parse(sessionStorage.getItem('user')))
-      .then(student => {
+      .subscribe(student => {
         if (student) {
           this.student = new Student(student.id, student.name, student.email, student.courses, student.activities, student.map); // TODO: check Object.assign
         }
-      })
-      .catch(error => {
+      },
+      error => {
         console.error('Error in get Course', error);
       });
   }

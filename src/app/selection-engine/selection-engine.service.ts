@@ -23,10 +23,10 @@ export class SelectionEngineService {
       if (Utils.elementExists(competence, courseActivity.competences) && !Utils.elementExists(courseActivity, student.activities)) {
         student.activities.push(courseActivity);
         this.studentService.updateStudent(student)
-          .then(response => {
+          .subscribe(response => {
             console.log('Student updated');
-          })
-          .catch(error => {
+          },
+          error => {
             console.error('Error in update student', error);
           });
         return courseActivity;

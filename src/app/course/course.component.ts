@@ -58,7 +58,7 @@ export class CourseComponent implements OnInit {
   public getCurrentStudent(): void {
     // TODO: change to current student
     this.studentService.getStudent(JSON.parse(sessionStorage.getItem('user')))
-      .then(student => {
+      .subscribe(student => {
         if (student) {
           this.student = new Student(student.id, student.name, student.email, student.courses, student.activities, student.map); // TODO: check Object.assign
 
@@ -68,8 +68,8 @@ export class CourseComponent implements OnInit {
           }
           this.student.map.competences[0].unlocked = true; // TODO: automatically
         }
-      })
-      .catch(error => {
+      },
+      error => {
         console.error('Error in get Course', error);
       });
   }

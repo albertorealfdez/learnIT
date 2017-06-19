@@ -29,12 +29,12 @@ export class ActivityComponent implements OnInit {
     
     // TODO: change to current student
     this.studentService.getStudent(JSON.parse(sessionStorage.getItem('user')))
-      .then(student => {
+      .subscribe(student => {
         if (student) {
           this.student = new Student(student.id, student.name, student.email, student.courses, student.activities, student.map); // TODO: check Object.assign
         }
-      })
-      .catch(error => {
+      },
+      error => {
         console.error('Error in get Course', error);
       });
   }
@@ -60,10 +60,10 @@ export class ActivityComponent implements OnInit {
     this.updateCompetences(this.selectedAnswer === 2);
 
     this.studentService.updateStudent(this.student)
-        .then(course => {
+        .subscribe(course => {
           window.history.back(); // TODO: change to current course page
-        })
-        .catch(error => {
+        },
+        error => {
           console.error('Error in update student', error);
         });
   }
