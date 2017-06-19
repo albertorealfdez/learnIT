@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
+import { Observable } from 'rxjs/Rx';
+
 import { Activity } from '../../shared/activity/activity.model';
 
 @Injectable()
@@ -9,30 +11,28 @@ export class DashboardActivityService {
 
   constructor(private http: Http) { }
 
-  public createActivity(activity: Activity): Promise<Activity> {
+  public createActivity(activity: Activity): Observable<Activity> {
     const url = `${this.activityUrl}`;
 
     return this.http.post(url, activity)
-      .toPromise()
-      .then(response => {
+      .map(response => {
         return response;
       })
       .catch(this.handleError);
   }
 
-  public updateActivity(activity: Activity): Promise<Activity> {
+  public updateActivity(activity: Activity): Observable<Activity> {
     const url = `${this.activityUrl}/${activity.id}`;
 
     return this.http.put(url, activity)
-      .toPromise()
-      .then(response => {
+      .map(response => {
         return response;
       })
       .catch(this.handleError);
   }
 
-  private handleError(error: any): Promise<any> {
+  private handleError(error: any): Observable<any> {
     console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
+    return Observable.throw(error.message || error);
   }
 }

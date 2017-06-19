@@ -74,9 +74,9 @@ export class DashboardActivityComponent implements OnInit {
 
   public createOrUpdateactivity() {
     this.dashboardActivityService.updateActivity(this.activity)
-      .then(competence => {
-      })
-      .catch(error => {
+      .subscribe(competence => {
+      },
+      error => {
         console.error('Error in updateActivity', error);
       });
   }

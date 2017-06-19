@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
-import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs/Rx';
 
 import { Course } from '../../course/course.model';
 
@@ -11,50 +11,46 @@ export class DashboardCourseService {
 
   constructor(private http: Http) { }
 
-  public getCourses(): Promise<Course[]> {
+  public getCourses(): Observable<Course[]> {
     return this.http.get(this.coursesUrl)
-      .toPromise()
-      .then(response => {
+      .map(response => {
         return response.json().data as Course[];
       })
       .catch(this.handleError);
   }
 
-  public getCourse(id: number): Promise<Course> {
+  public getCourse(id: number): Observable<Course> {
     const url = `${this.coursesUrl}/${id}`;
 
     return this.http.get(url)
-      .toPromise()
-      .then(response => {
+      .map(response => {
         return response.json().data as Course;
       })
       .catch(this.handleError);
   }
 
-  public getCourseByKey(key: string): Promise<Course> {
+  public getCourseByKey(key: string): Observable<Course> {
     const url = `${this.coursesUrl}?key=${key}`;
 
     return this.http.get(url)
-      .toPromise()
-      .then(response => {
+      .map(response => {
         return response.json().data[0] as Course;
       })
       .catch(this.handleError);
   }
 
-  public updateCourse(course: Course): Promise<Course> {
+  public updateCourse(course: Course): Observable<Course> {
     const url = `${this.coursesUrl}/${course.id}`;
 
     return this.http.put(url, course)
-      .toPromise()
-      .then(response => {
+      .map(response => {
         return response;
       })
       .catch(this.handleError);
   }
 
-  private handleError(error: any): Promise<any> {
+  private handleError(error: any): Observable<any> {
     console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
+    return Observable.throw(error.message || error);
   }
 }

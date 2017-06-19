@@ -28,12 +28,12 @@ export class DashboardCourseComponent implements OnInit {
     let courseKey: string = this.route.snapshot.params['key'];
 
     this.courseService.getCourseByKey(courseKey)
-      .then(course => {
+      .subscribe(course => {
         if (course) {
           this.course = course;
         }
-      })
-      .catch(error => {
+      },
+      error => {
         console.error('Error in get Course', error);
       });
   }
