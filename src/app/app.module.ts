@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Imports for loading & configuring the in-memory web api
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -22,8 +23,9 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule, // Angular modules
     HttpModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService), // App modules
-    CoreModule,
+    BrowserAnimationsModule,
+    InMemoryWebApiModule.forRoot(InMemoryDataService),
+    CoreModule, // App modules
     AppRoutingModule,
     HeaderModule,
     HomeModule,
