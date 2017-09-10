@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
+import { Observable } from 'rxjs/Rx';
+
 import { Student } from './student.model';
 
 @Injectable()
@@ -9,28 +11,26 @@ export class StudentService {
 
   constructor(private http: Http) {}
 
-  public getStudent(id: number): Promise<Student> {
+  public getStudent(id: number): Observable<Student> {
     const url = `${this.studentsUrl}/${id}`;
 
     return this.http.get(url)
-      .toPromise()
-      .then(response => response.json().data as Student)
+      .map(response => response.json().data as Student)
       .catch(this.handleError);
   }
 
-  public updateStudent(student: Student): Promise<Student> {
+  public updateStudent(student: Student): Observable<Student> {
     const url = `${this.studentsUrl}/${student.id}`;
 
     return this.http.put(url, student)
-      .toPromise()
-      .then(response => {
+      .map(response => {
         return response;
       })
       .catch(this.handleError);
   }
 
-  private handleError(error: any): Promise<any> {
+  private handleError(error: any): Observable<any> {
     console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
+    return Observable.throw(error.message || error);
   }
 }
