@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
 
   public loginUser(): void {
     this.userService.getUserByEmail(this.userLogin.email)
-      .then(user => {
+      .subscribe(user => {
         if (user.password === this.userLogin.password) {
           sessionStorage.setItem('user', user.id.toString()); // Temporal session
           if (user.type === 0) {

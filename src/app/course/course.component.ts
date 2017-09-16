@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import {
-  Course,
-  CourseService
-} from './';
+import { Course } from './course.model';
+import { CourseService } from './course.service';
 
 import { StudentCompetence } from '../shared/competence/student-competence.model';
 import { Activity } from '../shared/activity/activity.model';

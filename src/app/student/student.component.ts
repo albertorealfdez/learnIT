@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import {
-  Student,
-  StudentService
-} from './';
+import { Student } from './student.model';
+import { StudentService } from './student.service';
 import { CourseService } from '../course/course.service';
 
 @Component({

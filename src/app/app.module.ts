@@ -12,7 +12,6 @@ import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderModule } from './header/header.module';
 import { HomeModule } from './home/home.module';
-import { DashboardModule } from './dashboard/dashboard.module';
 import { StudentModule } from './student/student.module';
 import { CourseModule } from './course/course.module';
 
@@ -29,7 +28,6 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     HeaderModule,
     HomeModule,
-    DashboardModule,
     StudentModule,
     CourseModule
   ],
