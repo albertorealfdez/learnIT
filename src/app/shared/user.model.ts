@@ -1,7 +1,7 @@
 import { Course } from '../course/course.model';
 
 export class User {
-  public id: number;
+  public _id: string;
   public name: string;
   public email: string;
   public password: string;
@@ -9,7 +9,7 @@ export class User {
   public courses: Course[];
 
   constructor(
-      id: number,
+      id: string,
       name: string,
       email: string,
       courses: Course[]

@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Rx';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -10,12 +10,12 @@ import { User } from '../shared/user.model';
 export class UserService {
   private usersUrl = 'api/users';
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   public getUsers(): Observable<User[]> {
     return this.http.get(this.usersUrl)
       .map(response => {
-        return response.json().data as User[];
+        return response as User[];
       })
       .catch(this.handleError);
   }
@@ -24,7 +24,7 @@ export class UserService {
     const url = `${this.usersUrl}/${id}`;
 
     return this.http.get(url)
-      .map(response => response.json().data as User)
+      .map(response => response as User)
       .catch(this.handleError);
   }
 
@@ -32,15 +32,15 @@ export class UserService {
     const url = `${this.usersUrl}?email=${email}`;
 
     return this.http.get(url)
-      .map(response => response.json().data[0] as User)
+      .map(response => response as User)
       .catch(this.handleError);
   }
 
   public updateUser(user: User): Observable<User> {
-    const url = `${this.usersUrl}/${user.id}`;
+    const url = `${this.usersUrl}/${user._id}`;
 
     return this.http.put(url, user)
-      .map(response => response.json().data as User)
+      .map(response => response as User)
       .catch(this.handleError);
   }
 

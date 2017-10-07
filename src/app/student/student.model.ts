@@ -7,9 +7,9 @@ export class Student extends User {
     public activities: Activity[];
     public map: StudentMap;
 
-    constructor(id: number, name: string, email: string, courses: Course[], activities: Activity[], map: StudentMap) {
+    constructor(id: string, name: string, email: string, courses: Course[], activities: Activity[], map: StudentMap) {
         super(id, name, email, courses);
-        this.id = id;
+        this._id = id;
         this.name = name;
         this.email = email;
         this.courses = courses;

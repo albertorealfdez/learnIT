@@ -30,13 +30,11 @@ export class LoginComponent implements OnInit {
   public loginUser(): void {
     this.userService.getUserByEmail(this.userLogin.email)
       .subscribe(user => {
-        if (user.password === this.userLogin.password) {
-          sessionStorage.setItem('user', user.id.toString()); // Temporal session
-          if (user.type === 0) {
-            this.router.navigate(['/dashboard']);
-          } else {
-            this.router.navigate(['/student']);
-          }
+        if (user && user.password === this.userLogin.password) {
+          console.log(user);
+          sessionStorage.setItem('user', user._id); // Temporal session
+          // Temporary there will be only students
+          this.router.navigate(['/student']);
         } else {
           console.error('Login incorrecto');
         }

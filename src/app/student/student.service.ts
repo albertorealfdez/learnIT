@@ -20,7 +20,7 @@ export class StudentService {
   }
 
   public updateStudent(student: Student): Observable<Student> {
-    const url = `${this.studentsUrl}/${student.id}`;
+    const url = `${this.studentsUrl}/${student._id}`;
 
     return this.http.put(url, student)
       .map(response => {

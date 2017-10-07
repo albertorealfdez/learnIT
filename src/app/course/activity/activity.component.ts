@@ -33,7 +33,7 @@ export class ActivityComponent implements OnInit {
     this.studentService.getStudent(JSON.parse(sessionStorage.getItem('user')))
       .subscribe(student => {
         if (student) {
-          this.student = new Student(student.id, student.name, student.email, student.courses, student.activities, student.map); // TODO: check Object.assign
+          this.student = new Student(student._id, student.name, student.email, student.courses, student.activities, student.map); // TODO: check Object.assign
         }
       },
       error => {
