@@ -4,10 +4,6 @@ import {HttpClientModule} from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-// Imports for loading & configuring the in-memory web api
-//import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-//import { InMemoryDataService }  from './in-memory-data.service';
-
 // App modules
 import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -28,7 +24,6 @@ import { XHRInterceptor } from './interceptors/xhr.interceptor';
     BrowserModule, // Angular modules
     HttpClientModule,
     BrowserAnimationsModule,
-    //InMemoryWebApiModule.forRoot(InMemoryDataService),
     CoreModule, // App modules
     AppRoutingModule,
     HeaderModule,
