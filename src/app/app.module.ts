@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
+import {HttpClientModule} from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Imports for loading & configuring the in-memory web api
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService }  from './in-memory-data.service';
+//import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+//import { InMemoryDataService }  from './in-memory-data.service';
 
 // App modules
 import { CoreModule } from './core/core.module';
@@ -18,12 +19,16 @@ import { CourseModule } from './course/course.module';
 // App components
 import { AppComponent } from './app.component';
 
+// Interceptors
+import { XHRInterceptor } from './interceptors/xhr.interceptor';
+
+
 @NgModule({
   imports: [
     BrowserModule, // Angular modules
-    HttpModule,
+    HttpClientModule,
     BrowserAnimationsModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService),
+    //InMemoryWebApiModule.forRoot(InMemoryDataService),
     CoreModule, // App modules
     AppRoutingModule,
     HeaderModule,
@@ -32,6 +37,9 @@ import { AppComponent } from './app.component';
     CourseModule
   ],
   declarations: [ AppComponent ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: XHRInterceptor, multi: true }
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
