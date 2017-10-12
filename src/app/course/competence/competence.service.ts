@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Rx';
 
@@ -9,7 +9,7 @@ import { Competence } from '../../shared/competence/competence.model';
 export class CompetenceService {
   private competenceUrl = 'api/competences';
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   public createCompetence(competence: Competence): Observable<Competence> {
     const url = `${this.competenceUrl}`;

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Rx';
 
@@ -9,14 +9,14 @@ import { Competence } from './competence.model';
 export class CompetenceService {
   private competenceUrl = 'api/competences';
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   public getAllCompetences(): Observable<Competence[]> {
     const url = `${this.competenceUrl}`;
 
     return this.http.get(url)
       .map(response => {
-        return response.json().data as Competence[];
+        return response as Competence[];
       })
       .catch(this.handleError);
   }
@@ -26,7 +26,7 @@ export class CompetenceService {
 
     return this.http.get(url)
       .map(response => {
-        return response.json().data as Competence;
+        return response as Competence;
       })
       .catch(this.handleError);
   }

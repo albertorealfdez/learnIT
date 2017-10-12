@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Rx';
 
@@ -9,12 +9,12 @@ import { Course } from './course.model';
 export class CourseService {
   private coursesUrl = 'api/courses';
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   public getCourses(): Observable<Course[]> {
     return this.http.get(this.coursesUrl)
       .map(response => {
-        return response.json().data as Course[];
+        return response as Course[];
       })
       .catch(this.handleError);
   }
@@ -24,7 +24,7 @@ export class CourseService {
 
     return this.http.get(url)
       .map(response => {
-        return response.json().data as Course;
+        return response as Course;
       })
       .catch(this.handleError);
   }
@@ -34,7 +34,7 @@ export class CourseService {
 
     return this.http.get(url)
       .map(response => {
-        return response.json().data[0] as Course;
+        return response[0] as Course;
       })
       .catch(this.handleError);
   }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Utils } from '../shared/';
 
@@ -13,7 +13,7 @@ import { StudentService } from '../student/student.service';
 export class SelectionEngineService {
 
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private studentService: StudentService
   ) { }
 

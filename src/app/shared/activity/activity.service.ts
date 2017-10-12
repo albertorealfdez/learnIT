@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Rx';
 
@@ -9,14 +9,14 @@ import { Activity } from './activity.model';
 export class ActivityService {
   private activityUrl = 'api/activities';
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   public getAllActivities(): Observable<Activity[]> {
     const url = `${this.activityUrl}`;
 
     return this.http.get(url)
       .map(response => {
-        return response.json().data as Activity[];
+        return response as Activity[];
       })
       .catch(this.handleError);
   }
@@ -26,7 +26,7 @@ export class ActivityService {
 
     return this.http.get(url)
       .map(response => {
-        return response.json().data as Activity;
+        return response as Activity;
       })
       .catch(this.handleError);
   }

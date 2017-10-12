@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Rx';
 
@@ -9,13 +9,13 @@ import { Student } from './student.model';
 export class StudentService {
   private studentsUrl = 'api/students';
 
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
-  public getStudent(id: number): Observable<Student> {
+  public getStudent(id: string): Observable<Student> {
     const url = `${this.studentsUrl}/${id}`;
 
     return this.http.get(url)
-      .map(response => response.json().data as Student)
+      .map(response => response as Student)
       .catch(this.handleError);
   }
 
