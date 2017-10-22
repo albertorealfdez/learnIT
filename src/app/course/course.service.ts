@@ -19,7 +19,7 @@ export class CourseService {
       .catch(this.handleError);
   }
 
-  public getCourse(id: number): Observable<Course> {
+  public getCourse(id: string): Observable<Course> {
     const url = `${this.coursesUrl}/${id}`;
 
     return this.http.get(url)

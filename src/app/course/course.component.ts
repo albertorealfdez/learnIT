@@ -55,7 +55,7 @@ export class CourseComponent implements OnInit {
 
   public getCurrentStudent(): void {
     // TODO: change to current student
-    this.studentService.getStudent(JSON.parse(sessionStorage.getItem('user')))
+    this.studentService.getStudent(localStorage.getItem('user'))
       .subscribe(student => {
         if (student) {
           this.student = new Student(student._id, student.name, student.email, student.courses, student.activities, student.map); // TODO: check Object.assign

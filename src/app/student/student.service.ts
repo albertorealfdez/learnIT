@@ -7,7 +7,8 @@ import { Student } from './student.model';
 
 @Injectable()
 export class StudentService {
-  private studentsUrl = 'api/students';
+  private studentsUrl = 'api/users';
+  //private studentsUrl = 'api/students';
 
   constructor(private http: HttpClient) {}
 

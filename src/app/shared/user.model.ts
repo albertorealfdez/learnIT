@@ -13,6 +13,10 @@ export class User {
       name: string,
       email: string,
       courses: Course[]
-  ) {}
+  ) {
+    this._id = id;
+    this.email = email;
+    this.courses = Object.assign(courses);
+  }
 }
 

@@ -30,7 +30,7 @@ export class ActivityComponent implements OnInit {
     this.getCurrentActivity();
     
     // TODO: change to current student
-    this.studentService.getStudent(JSON.parse(sessionStorage.getItem('user')))
+    this.studentService.getStudent(JSON.parse(localStorage.getItem('user')))
       .subscribe(student => {
         if (student) {
           this.student = new Student(student._id, student.name, student.email, student.courses, student.activities, student.map); // TODO: check Object.assign
