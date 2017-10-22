@@ -5,7 +5,7 @@ import { Course } from '../course';
 
 export class Student extends User {
     public activities: Activity[];
-    public map: StudentMap;
+    public maps: StudentMap[];
 
     constructor(id: string, name: string, email: string, courses: Course[], activities: Activity[], map: StudentMap) {
         super(id, name, email, courses);
@@ -14,7 +14,7 @@ export class Student extends User {
         this.email = email;
         this.courses = courses;
         this.activities = activities;
-        this.map = map;
+        this.maps = [map];
     }
 }
 
