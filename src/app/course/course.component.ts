@@ -1,3 +1,4 @@
+import { CompetenceService } from './competence';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -11,7 +12,9 @@ import {
   StudentService
 } from '../student';
 import { StudentMap } from '../student-map';
+import { StudentMapService } from '../student-map/student-map.service';
 import { SelectionEngineService } from '../selection-engine/selection-engine.service';
+import { StudentCompetenceService } from '../shared/competence/student-competence.service';
 
 @Component({
   selector: 'app-course',
@@ -23,19 +26,32 @@ export class CourseComponent implements OnInit {
   public course: Course;
   public showNewCompetence: boolean;
   public currentMap: StudentMap;
+  public student: Student; 
     
-  @Input() student: Student; 
-
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private courseService: CourseService,
     private studentService: StudentService,
+    private studentMapService: StudentMapService,
+    private competenceService: StudentCompetenceService,
     private selectionService: SelectionEngineService
   ) {}
 
   ngOnInit() {
     this.getCurrentCourse();
+
+    // TODO: change to current student
+    this.studentService.getStudentByEmail(localStorage.getItem('user'))
+      .subscribe(student => {
+        if (student) {
+          this.student = student;    
+          this.setStudenMap(student.maps[0]);
+        }
+      },
+      error => {
+        console.error('Error in get Course', error);
+      });
   }
 
   public getCurrentCourse(): void {
@@ -46,13 +62,45 @@ export class CourseComponent implements OnInit {
         course => {
           if (course) {
             this.course = course; // TODO: check Object.assign
-            this.currentMap = this.student.maps[0]; // Change to obtain current course map
+          }
+        },
+        error => {
+          console.error('Error in get Course', error);
+        }
+      );
+  }
+
+  public setStudenMap(studentMapId): void {
+    this.studentMapService.getStudentMap(studentMapId) // Change to obtain current course 
+      .subscribe(
+        map => {
+          if (map) {
+            this.currentMap = map;
+            this.setStudentCompenteces(map.competences);
+            console.log('Map: ', this.currentMap)
           }
         },
         error => {
         console.error('Error in get Course', error);
         }
       );
+  }
+
+  public setStudentCompenteces(competences)  {
+    this.currentMap.competences = [];
+    console.log('IDS: ', competences)
+    for (let competenceId of competences) {
+        this.competenceService.getCompetence(competenceId)
+          .subscribe(competence => {
+            console.log('Now: ', competenceId, competence)
+            if (competence) {
+              this.currentMap.competences.push(competence);
+            }
+          },
+          error => {
+            console.error('Error in get Course', error);
+          });
+    }
   }
 
   public checkCompetence(compentece: StudentCompetence): void {

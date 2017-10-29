@@ -1,8 +1,8 @@
 <main class="course" *ngIf="student">
-  <h2>{{course.name}}</h2>
+  <h2>{{course?.name}}</h2>
   <section class="course__competences">
     <h3>Mapa</h3>
-    <ul>
+    <ul *ngIf="currentMap">
       <li class="course__competences__competence"
           *ngFor="let competence of currentMap.competences"
           (click)="checkCompetence(competence)">

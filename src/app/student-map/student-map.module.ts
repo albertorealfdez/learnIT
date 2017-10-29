@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { CourseService } from '../course/course.service';
+import { StudentMapService } from './student-map.service';
 import { StudentMapComponent } from './student-map.component';
 
 @NgModule({
@@ -11,7 +12,7 @@ import { StudentMapComponent } from './student-map.component';
   declarations: [
     StudentMapComponent
   ],
-  providers: [ CourseService ]
+  providers: [ CourseService, StudentMapService ]
 })
 
 export class StudentModule { }

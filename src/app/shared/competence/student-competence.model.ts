@@ -3,18 +3,18 @@ import { Competence } from '../competence/competence.model';
 export class StudentCompetence extends Competence {
     public force: number;
     public completed: boolean;
-    public unlocked: boolean;
+    public locked: boolean;
 
-    constructor(competence?: Competence) {
+    constructor(id, key, title, minThreshold, maxThreshold, force, completed, locked) {
         // TODO: set parent properties correctly
         super();
-        this.id = competence.id;
-        this.key = competence.key;
-        this.title = competence.title;
-        this.threshold = competence.threshold;
-
-        this.force = 0;
-        this.completed = false;
-        this.unlocked = false;
+        this.id = id;
+        this.key = key;
+        this.title = title;
+        this.minThreshold = minThreshold;
+        this.maxThreshold = maxThreshold;
+        this.force = force;
+        this.completed = completed;
+        this.locked = locked;
     }
 }

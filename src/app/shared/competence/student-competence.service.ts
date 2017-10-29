@@ -3,30 +3,30 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Rx';
 
-import { Competence } from './competence.model';
+import { StudentCompetence } from './student-competence.model';
 
 @Injectable()
-export class CompetenceService {
-  private competenceUrl = 'api/competences';
+export class StudentCompetenceService {
+  private competenceUrl = 'api/studentcompetences';
 
   constructor(private http: HttpClient) { }
 
-  public getAllCompetences(): Observable<Competence[]> {
+  public getAllCompetences(): Observable<StudentCompetence[]> {
     const url = `${this.competenceUrl}`;
 
     return this.http.get(url)
       .map(response => {
-        return response as Competence[];
+        return response as StudentCompetence[];
       })
       .catch(this.handleError);
   }
 
-  public getCompetence(id: string): Observable<Competence> {
+  public getCompetence(id: string): Observable<StudentCompetence> {
     const url = `${this.competenceUrl}/${id}`;
 
     return this.http.get(url)
       .map(response => {
-        return response as Competence;
+        return response as StudentCompetence;
       })
       .catch(this.handleError);
   }
