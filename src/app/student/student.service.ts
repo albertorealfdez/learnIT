@@ -7,13 +7,20 @@ import { Student } from './student.model';
 
 @Injectable()
 export class StudentService {
-  private studentsUrl = 'api/users';
-  //private studentsUrl = 'api/students';
+  private studentsUrl = 'api/students';
 
   constructor(private http: HttpClient) {}
 
   public getStudent(id: string): Observable<Student> {
     const url = `${this.studentsUrl}/${id}`;
+
+    return this.http.get(url)
+      .map(response => response as Student)
+      .catch(this.handleError);
+  }
+
+  public getStudentByEmail(email: string): Observable<Student> {
+    const url = `${this.studentsUrl}?email=${email}`;
 
     return this.http.get(url)
       .map(response => response as Student)

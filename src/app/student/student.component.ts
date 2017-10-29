@@ -14,7 +14,7 @@ import { Course } from '../course';
 
 export class StudentComponent implements OnInit {
   //public student: Student;
-  public student: User;
+  public student: Student;
 
   constructor(
     private courseService: CourseService,
@@ -23,12 +23,14 @@ export class StudentComponent implements OnInit {
 
   ngOnInit() {
     // TODO: change to current student
-    this.studentService.getStudent(localStorage.getItem('user'))
+    this.studentService.getStudentByEmail(localStorage.getItem('user'))
       .subscribe(student => {
         if (student) {
-          //this.student = new Student(student._id, student.name, student.email, student.courses, student.activities, student.map); // TODO: check Object.assign
-          this.student = new User(student._id, student.name, student.email, []);
+          this.student = student;
+          //this.student = new Student(student._id, student.name, student.email, student.courses, student.activities, student.maps); // TODO: check Object.assign
+          //this.student = new User(student._id, student.name, student.email, []);
           this.setStudentCourses(student.courses);
+          console.log(this.student);
         }
       },
       error => {
@@ -37,6 +39,7 @@ export class StudentComponent implements OnInit {
   }
 
   public setStudentCourses(studentCourses) {
+    this.student.courses = [];
     for (let courseId of studentCourses) {
       this.courseService.getCourse(courseId)
         .subscribe(course => {

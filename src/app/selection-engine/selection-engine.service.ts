@@ -38,7 +38,7 @@ export class SelectionEngineService {
     let isCorrect = answer === 2; // TODO: change to real service call
 
     for (let activityCompetence of activity.competences) {
-      for (let competence of student.map.competences) {
+      for (let competence of student.maps[0].competences) { // TODO: change index to current map
         if (activityCompetence.id === competence.id) {
           if (isCorrect) {
             competence.force += (activity.difficulty * 10);

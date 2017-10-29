@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     this.userService.getUserByEmail(this.userLogin.email)
       .subscribe(user => {
         if (user && user.password === this.userLogin.password) {
-          localStorage.setItem('user', user._id); // Temporal session
+          localStorage.setItem('user', user.email); // Temporal session
           // Temporary there will be only students
           this.router.navigate(['/student']);
         } else {

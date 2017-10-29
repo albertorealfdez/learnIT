@@ -4,7 +4,7 @@
     <h3>Mapa</h3>
     <ul>
       <li class="course__competences__competence"
-          *ngFor="let competence of student.map.competences"
+          *ngFor="let competence of currentMap.competences"
           (click)="checkCompetence(competence)">
           <p [ngClass]="{
               'course__competences__competence--unlocked': competence.unlocked,

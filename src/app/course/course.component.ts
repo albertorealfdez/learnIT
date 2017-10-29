@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Course } from './course.model';
@@ -8,9 +8,9 @@ import { StudentCompetence } from '../shared/competence/student-competence.model
 import { Activity } from '../shared/activity/activity.model';
 import {
   Student,
-  StudentService,
-  StudentMap
+  StudentService
 } from '../student';
+import { StudentMap } from '../student-map';
 import { SelectionEngineService } from '../selection-engine/selection-engine.service';
 
 @Component({
@@ -22,7 +22,9 @@ import { SelectionEngineService } from '../selection-engine/selection-engine.ser
 export class CourseComponent implements OnInit {
   public course: Course;
   public showNewCompetence: boolean;
-  public student: Student;
+  public currentMap: StudentMap;
+    
+  @Input() student: Student; 
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -44,32 +46,13 @@ export class CourseComponent implements OnInit {
         course => {
           if (course) {
             this.course = course; // TODO: check Object.assign
-            this.getCurrentStudent();
+            this.currentMap = this.student.maps[0]; // Change to obtain current course map
           }
         },
         error => {
         console.error('Error in get Course', error);
         }
       );
-  }
-
-  public getCurrentStudent(): void {
-    // TODO: change to current student
-    this.studentService.getStudent(localStorage.getItem('user'))
-      .subscribe(student => {
-        if (student) {
-          this.student = new Student(student._id, student.name, student.email, student.courses, student.activities, student.map); // TODO: check Object.assign
-
-          // TODO: change this obtention
-          if (!this.student.map.competences.length) {
-            this.student.map = new StudentMap(this.course.competences);
-          }
-          this.student.map.competences[0].unlocked = true; // TODO: automatically
-        }
-      },
-      error => {
-        console.error('Error in get Course', error);
-      });
   }
 
   public checkCompetence(compentece: StudentCompetence): void {
