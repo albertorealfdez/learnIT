@@ -5,16 +5,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Course } from './course.model';
 import { CourseService } from './course.service';
 
+import { StudentMap } from '../student-map';
 import { StudentCompetence } from '../shared/competence/student-competence.model';
 import { Activity } from '../shared/activity/activity.model';
 import {
   Student,
   StudentService
 } from '../student';
-import { StudentMap } from '../student-map';
 import { StudentMapService } from '../student-map/student-map.service';
 import { SelectionEngineService } from '../selection-engine/selection-engine.service';
 import { StudentCompetenceService } from '../shared/competence/student-competence.service';
+import { ActivityService } from '../shared/activity/activity.service';
 
 @Component({
   selector: 'app-course',
@@ -35,7 +36,8 @@ export class CourseComponent implements OnInit {
     private studentService: StudentService,
     private studentMapService: StudentMapService,
     private competenceService: StudentCompetenceService,
-    private selectionService: SelectionEngineService
+    private selectionService: SelectionEngineService,
+    private activityService: ActivityService
   ) {}
 
   ngOnInit() {
@@ -58,10 +60,10 @@ export class CourseComponent implements OnInit {
     let courseKey: string = this.activatedRoute.snapshot.params['key'];
 
     this.courseService.getCourseByKey(courseKey)
-      .subscribe(
-        course => {
+      .subscribe(course => {
           if (course) {
             this.course = course; // TODO: check Object.assign
+            this.getCourseActivites();
           }
         },
         error => {
@@ -72,27 +74,23 @@ export class CourseComponent implements OnInit {
 
   public setStudenMap(studentMapId): void {
     this.studentMapService.getStudentMap(studentMapId) // Change to obtain current course 
-      .subscribe(
-        map => {
+      .subscribe(map => {
           if (map) {
             this.currentMap = map;
             this.setStudentCompenteces(map.competences);
-            console.log('Map: ', this.currentMap)
           }
         },
         error => {
-        console.error('Error in get Course', error);
+          console.error('Error in get Course', error);
         }
       );
   }
 
   public setStudentCompenteces(competences)  {
     this.currentMap.competences = [];
-    console.log('IDS: ', competences)
     for (let competenceId of competences) {
         this.competenceService.getCompetence(competenceId)
           .subscribe(competence => {
-            console.log('Now: ', competenceId, competence)
             if (competence) {
               this.currentMap.competences.push(competence);
             }
@@ -101,6 +99,19 @@ export class CourseComponent implements OnInit {
             console.error('Error in get Course', error);
           });
     }
+  }
+
+  public getCourseActivites() {
+    this.activityService.getActivitiesByCourse(this.course._id)
+      .subscribe(activities => {
+          if (activities) {
+            this.course.activities = activities; // TODO: check Object.assign
+          }
+        },
+        error => {
+          console.error('Error in get Course', error);
+        }
+      );
   }
 
   public checkCompetence(compentece: StudentCompetence): void {

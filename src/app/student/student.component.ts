@@ -27,10 +27,7 @@ export class StudentComponent implements OnInit {
       .subscribe(student => {
         if (student) {
           this.student = student;
-          //this.student = new Student(student._id, student.name, student.email, student.courses, student.activities, student.maps); // TODO: check Object.assign
-          //this.student = new User(student._id, student.name, student.email, []);
           this.setStudentCourses(student.courses);
-          console.log(this.student);
         }
       },
       error => {

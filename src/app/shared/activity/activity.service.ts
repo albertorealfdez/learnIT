@@ -21,7 +21,17 @@ export class ActivityService {
       .catch(this.handleError);
   }
 
-  public getActivity(id: number): Observable<Activity> {
+  public getActivitiesByCourse(courseId: string): Observable<Activity[]> {
+    const url = `${this.activityUrl}?course=${courseId}`;
+
+    return this.http.get(url)
+      .map(response => {
+        return response as Activity[];
+      })
+      .catch(this.handleError);
+  }
+
+  public getActivity(id: string): Observable<Activity> {
     const url = `${this.activityUrl}/${id}`;
 
     return this.http.get(url)

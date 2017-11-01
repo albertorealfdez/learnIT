@@ -29,12 +29,12 @@ export class CourseService {
       .catch(this.handleError);
   }
 
-  public getCourseByKey(key: string): Observable<Course> {
+  public getCourseByKey(key: string): Observable<any> {
     const url = `${this.coursesUrl}?key=${key}`;
 
     return this.http.get(url)
       .map(response => {
-        return response[0] as Course;
+        return response as any;
       })
       .catch(this.handleError);
   }

@@ -8,7 +8,6 @@ import { CourseService } from './course.service';
 import { CompetenceComponent } from './competence/competence.component';
 import { ActivityComponent } from './activity/activity.component';
 import { CompetenceService } from './competence/competence.service';
-import { CourseActivityService } from './activity/activity.service';
 import { SelectionEngineService } from '../selection-engine/selection-engine.service';
 import { StudentMapService } from '../student-map/student-map.service';
 import { StudentCompetenceService } from '../shared/competence/student-competence.service';
@@ -23,7 +22,6 @@ import { StudentCompetenceService } from '../shared/competence/student-competenc
   providers: [
     CourseService,
     CompetenceService,
-    CourseActivityService,
     SelectionEngineService,
     StudentMapService,
     StudentCompetenceService

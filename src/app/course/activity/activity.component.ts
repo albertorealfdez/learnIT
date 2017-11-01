@@ -42,7 +42,7 @@ export class ActivityComponent implements OnInit {
   }
 
   public getCurrentActivity(): void {
-    let activityId: number = this.activatedRoute.snapshot.params['id'];
+    let activityId: string = this.activatedRoute.snapshot.params['id'];
 
     this.activityService.getActivity(activityId)
       .subscribe(
