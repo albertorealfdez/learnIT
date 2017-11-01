@@ -1,5 +1,5 @@
 export class Competence {
-  public id: number;
+  public _id: string;
   public key: string;
   public title: string;
   public minThreshold: number;

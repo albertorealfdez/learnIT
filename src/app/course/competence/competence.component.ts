@@ -20,7 +20,7 @@ export class CompetenceComponent implements OnInit {
   }
 
   public createOrUpdateCompetence() {
-    if (this.competence.id) {
+    if (this.competence._id) {
       this.updateCompetence();
     } else {
       this.createCompetence();

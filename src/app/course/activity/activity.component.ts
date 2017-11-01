@@ -28,12 +28,15 @@ export class ActivityComponent implements OnInit {
 
   ngOnInit() {
     this.getCurrentActivity();
-    
+    this.getCurrentStudent();
+  }
+
+  public getCurrentStudent() {
     // TODO: change to current student
-    this.studentService.getStudent(JSON.parse(localStorage.getItem('user')))
+    this.studentService.getStudentByEmail(localStorage.getItem('user'))
       .subscribe(student => {
         if (student) {
-          this.student = new Student(student._id, student.name, student.email, student.courses, student.activities, student.maps); // TODO: check Object.assign
+          this.student = student;    
         }
       },
       error => {

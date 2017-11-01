@@ -7,8 +7,8 @@
   </section>
   <section> 
       <form>
-        <div *ngFor="let answer of activity.answers">
-          <input type="radio" name="answer" [value]="answer.id" [(ngModel)]="selectedAnswer">{{answer.text}}
+        <div *ngFor="let choice of activity.choices">
+          <input type="radio" name="answer" [value]="choice" [(ngModel)]="selectedAnswer">{{choice}}
         </div>
         <input type="submit" value="Enviar" (click)="sendAnswer()">
       </form>

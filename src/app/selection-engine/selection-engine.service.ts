@@ -20,7 +20,7 @@ export class SelectionEngineService {
   // TODO: change to the corresponding api call
   public getNextActivity(student: Student, course: Course, competence: StudentCompetence): Activity {
     for (let courseActivity of course.activities) {
-      if (Utils.elementExists(competence, courseActivity.competences) && !Utils.elementExists(courseActivity, student.activities)) {
+      if ((courseActivity.competences.indexOf(competence._id) !== -1) && !Utils.elementExists(courseActivity, student.activities)) {
         student.activities.push(courseActivity);
         this.studentService.updateStudent(student)
           .subscribe(response => {
@@ -39,7 +39,7 @@ export class SelectionEngineService {
 
     for (let activityCompetence of activity.competences) {
       for (let competence of student.maps[0].competences) { // TODO: change index to current map
-        if (activityCompetence.id === competence.id) {
+        if (activityCompetence === competence._id) {
           if (isCorrect) {
             competence.force += (activity.difficulty * 10);
           } else {

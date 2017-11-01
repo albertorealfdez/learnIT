@@ -22,7 +22,7 @@ export class CompetenceService {
   }
 
   public updateCompetence(competence: Competence): Observable<Competence> {
-    const url = `${this.competenceUrl}/${competence.id}`;
+    const url = `${this.competenceUrl}/${competence._id}`;
     return this.http.put(url, competence)
       .map(response => {
         return response;

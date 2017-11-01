@@ -8,7 +8,7 @@ export class StudentCompetence extends Competence {
     constructor(id, key, title, minThreshold, maxThreshold, force, completed, locked) {
         // TODO: set parent properties correctly
         super();
-        this.id = id;
+        this._id = id;
         this.key = key;
         this.title = title;
         this.minThreshold = minThreshold;
