@@ -5,4 +5,9 @@ export class StudentMap {
     public id: string;
     public courseId: string;
     public competences: StudentCompetence[];
+    
+    constructor(id: string, courseId: string = "", competences: StudentCompetence[] = []) {
+        this.courseId = courseId;
+        this.competences = competences;
+    }
 }

@@ -4,10 +4,10 @@ import { Activity } from '../shared/activity/activity.model';
 import { Course } from '../course';
 
 export class Student extends User {
-    public activities: Activity[];
+    public activities: string[];
     public maps: StudentMap[];
 
-    constructor(id: string, name: string, email: string, courses: Course[], activities: Activity[], maps: StudentMap[]) {
+    constructor(id: string, name: string, email: string, courses: Course[], activities: string[], maps: StudentMap[]) {
         super(id, name, email, courses);
         this._id = id;
         this.name = name;

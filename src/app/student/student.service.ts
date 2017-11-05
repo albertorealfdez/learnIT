@@ -8,8 +8,17 @@ import { Student } from './student.model';
 @Injectable()
 export class StudentService {
   private studentsUrl = 'api/students';
+  private currentStudent: Student;
 
   constructor(private http: HttpClient) {}
+  
+  public setCurrentStudent(student: Student) {
+    this.currentStudent = student;
+  }
+
+  public getCurrentStudent(): Student {
+    return this.currentStudent;
+  }
 
   public getStudent(id: string): Observable<Student> {
     const url = `${this.studentsUrl}/${id}`;

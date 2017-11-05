@@ -5,13 +5,14 @@ import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 
 import { User } from '../shared/user.model';
+import { Student } from '../student';
 
 @Injectable()
 export class UserService {
   private usersUrl = 'api/users';
 
   constructor(private http: HttpClient) { }
-
+  
   public getUsers(): Observable<User[]> {
     return this.http.get(this.usersUrl)
       .map(response => {

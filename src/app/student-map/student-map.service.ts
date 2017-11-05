@@ -11,7 +11,7 @@ export class StudentMapService {
 
   constructor(private http: HttpClient) {}
 
-  public getStudentMap(id: string): Observable<StudentMap> {
+  public getStudentMap(id: string): Observable<any> { // TODO: change to real one (course_id problem)
     const url = `${this.studentMapsUrl}/${id}`;
 
     return this.http.get(url)

@@ -33,15 +33,7 @@ export class ActivityComponent implements OnInit {
 
   public getCurrentStudent() {
     // TODO: change to current student
-    this.studentService.getStudentByEmail(localStorage.getItem('user'))
-      .subscribe(student => {
-        if (student) {
-          this.student = student;    
-        }
-      },
-      error => {
-        console.error('Error in get Course', error);
-      });
+    this.student = this.studentService.getCurrentStudent();    
   }
 
   public getCurrentActivity(): void {
@@ -63,7 +55,6 @@ export class ActivityComponent implements OnInit {
   public sendAnswer(): void {
     // TODO: use a service
     this.selectionService.updateCompetences(this.selectedAnswer, this.activity, this.student);
-
     this.studentService.updateStudent(this.student)
         .subscribe(course => {
           window.history.back(); // TODO: change to current course page

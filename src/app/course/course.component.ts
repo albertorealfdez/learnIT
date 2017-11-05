@@ -41,22 +41,8 @@ export class CourseComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.student = this.studentService.getCurrentStudent();  
     this.getCurrentCourse();
-    this.getCurrentStudent();
-  }
-
-  public getCurrentStudent() { // Make common
-    // TODO: change to current student
-    this.studentService.getStudentByEmail(localStorage.getItem('user'))
-      .subscribe(student => {
-        if (student) {
-          this.student = student;    
-          this.setStudenMap(student.maps[0]);
-        }
-      },
-      error => {
-        console.error('Error in get Course', error);
-      });
   }
 
   public getCurrentCourse(): void {
@@ -67,6 +53,7 @@ export class CourseComponent implements OnInit {
           if (course) {
             this.course = course; // TODO: check Object.assign
             this.getCourseActivites();
+            this.currentMap = this.student.maps.filter(map => map.courseId === this.course._id)[0];
           }
         },
         error => {
@@ -121,7 +108,7 @@ export class CourseComponent implements OnInit {
     let activity: Activity = this.selectionService.getNextActivity(this.student, this.course, compentece);
 
     if (activity) {
-      this.router.navigate(['activity', activity._id]);
+      this.router.navigate(['/activity', activity._id]);
     }
   }
 }

@@ -20,8 +20,8 @@ export class SelectionEngineService {
   // TODO: change to the corresponding api call
   public getNextActivity(student: Student, course: Course, competence: StudentCompetence): Activity {
     for (let courseActivity of course.activities) {
-      if ((courseActivity.competences.indexOf(competence._id) !== -1) && !Utils.elementExists(courseActivity, student.activities)) {
-        student.activities.push(courseActivity);
+      if ((courseActivity.competences.indexOf(competence._id) !== -1) && student.activities.indexOf(courseActivity._id) !== -1) {
+        student.activities.push(courseActivity._id);
         this.studentService.updateStudent(student)
           .subscribe(response => {
             console.log('Student updated');
