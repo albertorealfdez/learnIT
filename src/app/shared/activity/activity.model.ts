@@ -6,4 +6,5 @@ export class Activity {
   public competences: string[];
   public choices: string[];
   public difficulty: number;
+  public correct: number;
 }

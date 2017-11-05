@@ -18,13 +18,14 @@ export class SelectionEngineService {
   ) { }
 
   // TODO: change to the corresponding api call
+  //       change obtention to available and done activities
   public getNextActivity(student: Student, course: Course, competence: StudentCompetence): Activity {
     for (let courseActivity of course.activities) {
-      if ((courseActivity.competences.indexOf(competence._id) !== -1) && student.activities.indexOf(courseActivity._id) !== -1) {
+      if ((courseActivity.competences.indexOf(competence._id) !== -1) && student.activities.indexOf(courseActivity._id) === -1) {
         student.activities.push(courseActivity._id);
-        this.studentService.updateStudent(student)
+        
+        this.studentService.updateStudentActivities(student)
           .subscribe(response => {
-            console.log('Student updated');
           },
           error => {
             console.error('Error in update student', error);
@@ -34,9 +35,7 @@ export class SelectionEngineService {
     }
   }
 
-  public updateCompetences(answer: number, activity: Activity, student: Student): void {
-    let isCorrect = answer === 2; // TODO: change to real service call
-
+  public processCompetences(isCorrect: boolean, activity: Activity, student: Student): void {
     for (let activityCompetence of activity.competences) {
       for (let competence of student.maps[0].competences) { // TODO: change index to current map
         if (activityCompetence === competence._id) {
@@ -48,7 +47,6 @@ export class SelectionEngineService {
           if (competence.force > 0) {
             competence.locked = true;
           }
-
           if (competence.force >= competence.minThreshold) {
             competence.completed = true;
           } else {

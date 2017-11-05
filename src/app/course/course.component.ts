@@ -1,9 +1,9 @@
-import { CompetenceService } from './competence';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Course } from './course.model';
 import { CourseService } from './course.service';
+import { CompetenceService } from './competence';
 
 import { StudentMap } from '../student-map';
 import { StudentCompetence } from '../shared/competence/student-competence.model';
@@ -104,8 +104,8 @@ export class CourseComponent implements OnInit {
       );
   }
 
-  public checkCompetence(compentece: StudentCompetence): void {
-    let activity: Activity = this.selectionService.getNextActivity(this.student, this.course, compentece);
+  public checkCompetence(compentence: StudentCompetence): void {
+    let activity: Activity = this.selectionService.getNextActivity(this.student, this.course, compentence);
 
     if (activity) {
       this.router.navigate(['/activity', activity._id]);

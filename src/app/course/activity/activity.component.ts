@@ -5,6 +5,7 @@ import { Activity } from '../../shared/activity/activity.model';
 import { ActivityService } from '../../shared/activity/activity.service';
 import { Student, StudentService } from '../../student';
 import { SelectionEngineService } from '../../selection-engine/selection-engine.service';
+import { StudentCompetenceService } from '../../shared/competence/student-competence.service';
 
 @Component({
   selector: 'app-activity',
@@ -14,7 +15,7 @@ import { SelectionEngineService } from '../../selection-engine/selection-engine.
 
 export class ActivityComponent implements OnInit {
   public activity: Activity;
-  public selectedAnswer: number;
+  public selectedAnswer: string;
   public wrongAnswer: boolean;
   public student: Student;
 
@@ -23,7 +24,8 @@ export class ActivityComponent implements OnInit {
     private router: Router,
     private activityService: ActivityService,
     private studentService: StudentService,
-    private selectionService: SelectionEngineService
+    private selectionService: SelectionEngineService,
+    private competenceService: StudentCompetenceService
   ) {}
 
   ngOnInit() {
@@ -52,15 +54,21 @@ export class ActivityComponent implements OnInit {
       );
   }
 
-  public sendAnswer(): void {
-    // TODO: use a service
-    this.selectionService.updateCompetences(this.selectedAnswer, this.activity, this.student);
-    this.studentService.updateStudent(this.student)
-        .subscribe(course => {
-          window.history.back(); // TODO: change to current course page
+  public sendAnswer(): void { // TODO: move performance to back-end
+    let correctAsnwer = this.activity.choices[this.activity.correct];
+    let isCorrect = correctAsnwer === this.selectedAnswer;
+    this.selectionService.processCompetences(isCorrect, this.activity, this.student);
+
+    for (let competenceId of this.activity.competences) {
+      let updatedCompetence = this.student.maps[0].competences.filter(competence => competence._id === competenceId)[0];
+      this.competenceService.updateCompetence(updatedCompetence)
+        .subscribe(competence => {
         },
         error => {
-          console.error('Error in update student', error);
+          console.error('Error updating competence', error);
         });
+      
+    }
+    window.history.back(); // TODO: change to current course page
   }
 }

@@ -36,10 +36,14 @@ export class StudentService {
       .catch(this.handleError);
   }
 
-  public updateStudent(student: Student): Observable<Student> {
-    const url = `${this.studentsUrl}/${student._id}`;
+  public updateStudentActivities(student: Student): Observable<Student> {
+    return this.updateField(student._id, { activities: student.activities});
+  }
 
-    return this.http.put(url, student)
+  public updateField(studentId: string, fields: any) {
+    const url = `${this.studentsUrl}/${studentId}`;
+
+    return this.http.patch(url, fields)
       .map(response => {
         return response;
       })

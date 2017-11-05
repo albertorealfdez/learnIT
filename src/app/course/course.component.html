@@ -7,8 +7,8 @@
           *ngFor="let competence of currentMap.competences"
           (click)="checkCompetence(competence)">
           <p [ngClass]="{
-              'course__competences__competence--unlocked': competence.unlocked,
-              'course__competences__competence--locked': !competence.unlocked,
+              'course__competences__competence--unlocked': !competence.locked,
+              'course__competences__competence--locked': competence.locked,
               'course__competences__competence--completed': competence.completed}">
             {{competence.key}}
             <br />{{competence.force}}
