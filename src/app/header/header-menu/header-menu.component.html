@@ -1,4 +1,14 @@
-<ul class="header__menu">
-  <li><a routerLink="/home" routerLinkActive="active">Inicio</a></li>
-  <li><a routerLink="">Salir</a></li>
-</ul>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="push" class="header__menu">
+    <button mat-button (click)="sidenav.close()">
+    <mat-icon>menu</mat-icon>
+  </button>
+    <ul class="header__menu__options">
+      <li><a routerLink="/home" routerLinkActive="active">Inicio</a></li>
+      <li><a routerLink="">Salir</a></li>
+    </ul>
+  </mat-sidenav>
+  <button mat-button (click)="sidenav.open()">
+    <mat-icon>menu</mat-icon>
+  </button>
+</mat-sidenav-container>
