@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 
+import { MaterialModule } from '../material.module';
 import { SharedModule } from '../shared/shared.module';
 import { CourseRoutingModule } from './course-routing.module';
 import { CourseComponent } from './course.component';
@@ -12,7 +13,7 @@ import { StudentMapService } from '../student-map/student-map.service';
 import { StudentCompetenceService } from '../shared/competence/student-competence.service';
 
 @NgModule({
-  imports: [ SharedModule, CourseRoutingModule ],
+  imports: [ SharedModule, CourseRoutingModule, MaterialModule ],
   declarations: [
     CourseComponent,
     CompetenceComponent,
