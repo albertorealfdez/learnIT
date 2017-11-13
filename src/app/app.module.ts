@@ -4,6 +4,8 @@ import {HttpClientModule} from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { MaterialModule } from './material.module';
+
 // App modules
 import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -24,6 +26,7 @@ import { XHRInterceptor } from './interceptors/xhr.interceptor';
     BrowserModule, // Angular modules
     HttpClientModule,
     BrowserAnimationsModule,
+    MaterialModule,
     CoreModule, // App modules
     AppRoutingModule,
     HeaderModule,
