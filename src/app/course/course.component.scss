@@ -1,4 +1,18 @@
+@import '../../styles/main.scss';
+
 .course {
+  /* TODO: move to general layout **/
+  &__abstract {
+    background-color: $english-holly;
+    margin-top: 4rem;
+    min-height: 10rem;
+    padding: 1rem;
+
+    h2, h3 {
+      font-weight: 300;
+    }
+  }
+
   &__competences {
     &__competence {
       cursor: pointer;

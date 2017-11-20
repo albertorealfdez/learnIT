@@ -1,5 +1,8 @@
 <main class="course" *ngIf="student">
-  <h2>{{course?.name}}</h2>
+  <section class="course__abstract">
+    <h2>{{course?.name}}</h2>
+    <h3>{{course?.year}}</h3>
+  </section>
   <section class="course__competences">
     <h3>Mapa</h3>
     <ul *ngIf="currentMap">

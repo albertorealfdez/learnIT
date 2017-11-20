@@ -1,0 +1,14 @@
+@import '../../styles/main.scss';
+
+/* TODO: move to general layout **/
+.home {
+  background-color: $english-holly;
+  margin-top: 4rem;
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: $white;
+
+  h1, h2 {
+    font-weight: 300;
+  }
+}

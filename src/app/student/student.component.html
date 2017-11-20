@@ -1,7 +1,12 @@
 <main class="student-page" *ngIf="student">
-  <h1>{{student.name}}</h1>
+  <section class="student-page__abstract">
+    <div class="student-page__student">
+      <img class="student-page__student__avatar" src="../../assets/img/default-avatar.png">
+      <h1>{{student.name}}</h1>
+    </div>
+  </section>
   <section class="student-page__courses">
-    <ul>
+    <ul class="student-page__courses__list">
       <li *ngFor="let course of student.courses">
         <mat-card class="student-page__courses__card">
           <mat-card-header>
