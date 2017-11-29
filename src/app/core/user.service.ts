@@ -13,6 +13,14 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
   
+  public logout(): void {
+    localStorage.removeItem('user');    
+  }
+
+  public isLoggedIn(): boolean {
+    return localStorage.getItem('user') ? true : false;
+  }
+
   public getUsers(): Observable<User[]> {
     return this.http.get(this.usersUrl)
       .map(response => {
