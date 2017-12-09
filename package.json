@@ -14,13 +14,13 @@
   },
   "private": true,
   "engines": {
-    "node": "~8.1.2",
-    "npm": "~5.0.3"
+    "node": "8.9.1",
+    "npm": "5.5.1"
   },
   "dependencies": {
     "@angular/animations": "^5.0.1",
     "@angular/cdk": "^5.0.0-rc0",
-    "@angular/cli": "^1.5.5",
+    "@angular/cli": "^1.5.4",
     "@angular/common": "^5.0.1",
     "@angular/compiler": "^5.0.1",
     "@angular/compiler-cli": "^5.0.5",
