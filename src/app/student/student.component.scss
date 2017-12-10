@@ -1,0 +1,45 @@
+@import '../../styles/main.scss';
+
+/* TODO: move to general layout **/
+.student-page__abstract {
+  background-color: $english-holly;
+  margin-top: 4rem;
+  min-height: 10rem;
+}
+
+.student-page__student {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  
+  h1 {
+    font-weight: 300;
+  }
+
+  &__avatar {
+    border-radius: 100%;
+    margin-right: 2rem;
+    height: 6rem;
+    width: 6rem;
+  }
+}
+
+.student-page__courses {
+  color: black;
+  margin-top: -2.5rem;
+
+  ul {
+    list-style: none;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__card {
+    margin-bottom: 2rem;
+    width: 30rem;
+  }
+}

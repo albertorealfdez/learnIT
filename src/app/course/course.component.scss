@@ -1,0 +1,41 @@
+@import '../../styles/main.scss';
+
+.course {
+  /* TODO: move to general layout **/
+  &__abstract {
+    background-color: $english-holly;
+    margin-top: 4rem;
+    min-height: 10rem;
+    padding: 1rem;
+
+    h2, h3 {
+      font-weight: 300;
+    }
+  }
+
+  &__competences {
+    &__competence {
+      cursor: pointer;
+      list-style: none;
+      display: inline-block;     
+      margin-right: 10px;
+    }
+
+    &__competence p {
+      padding: 10px;
+      border-radius: 100%;
+    }
+
+    &__competence--locked {
+        background-color: grey;
+    }
+
+    &__competence--unlocked {
+      background-color: yellow;
+    }
+
+    &__competence--completed {
+      background-color: green;
+    }
+  }
+}

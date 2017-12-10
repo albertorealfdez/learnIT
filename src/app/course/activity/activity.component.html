@@ -1,0 +1,21 @@
+<main class="activity-page" *ngIf="activity">
+  <section class="activity-page__abstract">
+    <h1>Actividad {{activity.key}}</h1>
+  </section>
+  <mat-card class="activity-page__card"> <!-- Abstract and content section -->
+      <h2>{{activity.title}}</h2>
+      <p>{{activity.abstract}}</p>
+      <p>{{activity.content}}</p>
+      <section> 
+        <form>
+          <div *ngFor="let choice of activity.choices">
+            <input type="radio" name="answer" [value]="choice" [(ngModel)]="selectedAnswer">{{choice}}
+          </div>
+          <mat-card-actions>
+            <input class="mat-button main-button" type="submit" value="Enviar" (click)="sendAnswer()">
+          </mat-card-actions>
+        </form>
+        <p *ngIf="wrongAnswer">Incorrecto</p>
+    </section>
+  </mat-card>
+</main>

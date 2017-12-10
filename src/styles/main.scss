@@ -1,0 +1,14 @@
+// TODO: check layout and components folders
+
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+
+@import 'base/base';
+@import 'base/reset';
+@import 'base/typography';
+
+@import 'components/buttons';
+
+@import 'layout/header';
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
