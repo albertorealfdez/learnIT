@@ -30,7 +30,7 @@ export class StudentComponent implements OnInit {
 
   ngOnInit() {
     // TODO: change to current student
-    this.studentService.getStudentByEmail(localStorage.getItem('user'))
+    /* this.studentService.getStudentByEmail(localStorage.getItem('user'))
       .subscribe(student => {
         if (student) {
           this.student = student;
@@ -41,6 +41,10 @@ export class StudentComponent implements OnInit {
       },
       error => {
         console.error('Error in get Course', error);
+      }); */
+      this.studentService.configCurrentStudent();
+      this.studentService.loggedStudent.subscribe(student => {
+        this.student = student;
       });
   }
 

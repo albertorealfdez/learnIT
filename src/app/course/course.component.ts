@@ -41,19 +41,23 @@ export class CourseComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.student = this.studentService.getCurrentStudent();  
-    this.getCurrentCourse();
+    this.student = this.studentService.getCurrentStudent();
+    
+    if (!this.student) {
+      this.router.navigateByUrl('/student');
+    } else {
+      this.getCurrentCourse();
+    }
   }
 
   public getCurrentCourse(): void {
     let courseKey: string = this.activatedRoute.snapshot.params['key'];
-
     this.courseService.getCourseByKey(courseKey)
       .subscribe(course => {
-          if (course) {
+          if (course) {            
             this.course = course; // TODO: check Object.assign
             this.getCourseActivites();
-            this.currentMap = this.student.maps.filter(map => map.courseId === this.course._id)[0];
+            this.currentMap = this.student.maps.filter(map => map.courseId == this.course._id)[0];
           }
         },
         error => {
