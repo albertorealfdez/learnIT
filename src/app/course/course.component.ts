@@ -107,12 +107,4 @@ export class CourseComponent implements OnInit {
         }
       );
   }
-
-  public checkCompetence(compentence: StudentCompetence): void {
-    let activity: Activity = this.selectionService.getNextActivity(this.student, this.course, compentence);
-
-    if (activity) {
-      this.router.navigate(['/activity', activity._id]);
-    }
-  }
 }

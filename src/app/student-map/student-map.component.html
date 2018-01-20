@@ -1,0 +1,16 @@
+<section class="student-map">
+  <h3>Mapa</h3>
+  <ul *ngIf="studentMap">
+    <li class="student-map__competence"
+        *ngFor="let competence of studentMap.competences"
+        (click)="checkCompetence(competence)">
+        <p [ngClass]="{
+            'student-map__competence--unlocked': !competence.locked,
+            'student-map__competence--locked': competence.locked,
+            'student-map__competence--completed': competence.completed}">
+          {{competence.key}}
+          <br />{{competence.force}}
+        </p>
+    </li>
+  </ul>
+</section>

@@ -1,0 +1,25 @@
+.student-map {
+  &__competence {
+    cursor: pointer;
+    list-style: none;
+    display: inline-block;     
+    margin-right: 10px;
+  }
+
+  &__competence p {
+    padding: 10px;
+    border-radius: 100%;
+  }
+
+  &__competence--locked {
+      background-color: grey;
+  }
+
+  &__competence--unlocked {
+    background-color: yellow;
+  }
+
+  &__competence--completed {
+    background-color: green;
+  }
+}
