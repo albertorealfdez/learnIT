@@ -12,7 +12,7 @@
             <input type="radio" name="answer" [value]="choice" [(ngModel)]="selectedAnswer">{{choice}}
           </div>
           <mat-card-actions>
-            <input class="mat-button main-button" type="submit" value="Enviar" (click)="sendAnswer()">
+            <button mat-button class="base-button" (click)="sendAnswer()">Enviar</button>
           </mat-card-actions>
         </form>
         <p *ngIf="wrongAnswer">Incorrecto</p>

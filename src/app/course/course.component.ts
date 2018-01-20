@@ -5,14 +5,14 @@ import { Course } from './course.model';
 import { CourseService } from './course.service';
 import { CompetenceService } from './competence';
 
-import { StudentMap } from '../student-map';
+import { StudentMap } from './student-map';
 import { StudentCompetence } from '../shared/competence/student-competence.model';
 import { Activity } from '../shared/activity/activity.model';
 import {
   Student,
   StudentService
 } from '../student';
-import { StudentMapService } from '../student-map/student-map.service';
+import { StudentMapService } from './student-map/student-map.service';
 import { SelectionEngineService } from '../selection-engine/selection-engine.service';
 import { StudentCompetenceService } from '../shared/competence/student-competence.service';
 import { ActivityService } from '../shared/activity/activity.service';

@@ -5,8 +5,8 @@ import { Observable } from 'rxjs/Rx';
 
 import { Student } from './student.model';
 import { CourseService } from '../course/course.service';
-import { StudentMap } from '../student-map/student-map.model';
-import { StudentMapService } from '../student-map/student-map.service';
+import { StudentMap } from '../course/student-map/student-map.model';
+import { StudentMapService } from '../course/student-map/student-map.service';
 import { StudentCompetenceService } from 'app/shared/competence/student-competence.service';
 import { StudentCompetence } from 'app/shared/competence/student-competence.model';
 import { Subject } from 'rxjs/Subject';

@@ -3,10 +3,10 @@ import { Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { StudentCompetence, Activity } from 'app/shared';
-import { StudentMap } from 'app/student-map/student-map.model';
+import { StudentMap } from './student-map.model';
 import { SelectionEngineService } from 'app/selection-engine/selection-engine.service';
 import { Student } from 'app/student/student.model';
-import { Course } from 'app/course/course.model';
+import { Course } from '../course.model';
 
 @Component({
   selector: 'app-student-map',

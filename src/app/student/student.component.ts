@@ -3,11 +3,11 @@ import { Component, OnInit } from '@angular/core';
 
 import { Student } from './student.model';
 import { User } from '../shared/user.model';
-import { StudentMap } from '../student-map';
+import { StudentMap } from '../course/student-map';
 import { StudentService } from './student.service';
 import { CourseService } from '../course/course.service';
 import { Course } from '../course';
-import { StudentMapService } from '../student-map/student-map.service';
+import { StudentMapService } from '../course/student-map/student-map.service';
 import { StudentCompetenceService } from '../shared/competence/student-competence.service';
 import { StudentCompetence } from '../shared/competence';
 
