@@ -18,4 +18,9 @@ export class HeaderComponent {
     this.userService.logout();
     this.router.navigate(['/home']);
   }
+
+  public goHome() {
+    let route: string = this.userService.isLoggedIn() ? '/student' : '/home';
+    this.router.navigateByUrl(route);
+  }
 }

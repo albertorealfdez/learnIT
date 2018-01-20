@@ -1,8 +1,7 @@
 <header class="header">
     <mat-toolbar>
-        <mat-icon>home</mat-icon>
         <nav class="header__menu">
-            <a mat-button routerLink="/home">Inicio</a>
+            <button mat-button (click)="goHome()">Inicio</button>
             <button mat-button (click)="logout()">Salir</button>
         </nav>
     </mat-toolbar>
