@@ -6,7 +6,6 @@ export class StudentMap {
     public id: string;
     public courseId: string;
     public competences: StudentCompetence[];
-    //public connections: Connection[];
     public connections: any[];
     
     constructor(id: string, courseId: string = "", competences: StudentCompetence[] = [], connections: Connection[] = []) {

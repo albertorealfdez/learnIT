@@ -39,20 +39,22 @@ export class StudentMapComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(){
     this.svg = d3.select('svg');
     
-    var width = +this.svg.attr('width');
-    var height = +this.svg.attr('height');
+    let width = +this.svg.attr('width');
+    let height = +this.svg.attr('height');
+    let startX = width / 3;
+    let startY = height /3;
 
     this.color = d3.scaleOrdinal(d3.schemeCategory20);
     
     this.simulation = d3.forceSimulation()
         .force('link', d3.forceLink().id(function(d: any) { return d._id; }))
         .force('charge', d3.forceManyBody())
-        .force('center', d3.forceCenter(width / 2, height / 2));
+        .force('center', d3.forceCenter(startX, startY));
 
     // Temporal
-    this.studentMap.connections = [
+    /*this.studentMap.connections = [
       { 'source': '5a2adaab975a6d4285359f0a', 'target': '5a2adaab975a6d4285359f0b'}
-    ];
+    ];*/
     this.render();
   }
 
@@ -64,8 +66,8 @@ export class StudentMapComponent implements OnInit, AfterViewInit {
         .attr('y2', (d) => { return d.target.y; });
 
     this.node
-        .attr('cx', function(d) { return d.x; })
-        .attr('cy', function(d) { return d.y; });
+        .attr('cx', (d) => { return d.x; })
+        .attr('cy', (d) => { return d.y; });
   }
   
   public render() {
@@ -77,20 +79,18 @@ export class StudentMapComponent implements OnInit, AfterViewInit {
       .append('line')
         .attr('stroke-width', 5)
         .attr('stroke', 'black')
-        .attr('marker-end', 'url(#end-arrow)');
+        .attr('marker-end', 'url(#end-arrow)')
     
     this.node = this.svg.append('g')
       .attr('class', 'nodes')
       .selectAll('circle')
       .data(this.studentMap.competences)
-      .enter().append('circle')
-        .attr('r', 30)
-        .attr('fill', (d)=> { return this.color(d.group); })
-        .call(d3.drag()
-            .on('start', (d) => { return this.dragstarted(d) })
-            .on('drag', (d) => { return this.dragged(d) })
-            .on('end', (d) => { return this.dragended(d) }));
-
+      .enter()
+        .append('circle')
+          .attr('r', 30)
+          .attr('fill', (d)=> { return this.color(d.group); })
+        
+        
     this.svg.append('svg:defs').append('svg:marker')
       .attr('id', 'end-arrow')
       .attr('viewBox', '0 -5 10 10')
@@ -111,23 +111,6 @@ export class StudentMapComponent implements OnInit, AfterViewInit {
 
     this.simulation.force('link')
       .links(this.studentMap.connections);  
-  }
-  
-  dragged(d) {
-    d.fx = d3.event.x;
-    d.fy = d3.event.y;
-  }
-  
-  dragended(d) {
-    if (!d3.event.active) this.simulation.alphaTarget(0);
-    d.fx = null;
-    d.fy = null;
-  }
-  
-  dragstarted(d) {
-    if (!d3.event.active) this.simulation.alphaTarget(0.3).restart();
-    d.fx = d.x;
-    d.fy = d.y;
   }
 
   public checkCompetence(compentence: StudentCompetence): void {

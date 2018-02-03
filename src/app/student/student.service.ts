@@ -67,11 +67,12 @@ export class StudentService {
 
   public setStudenMaps(studentMaps): void { // TODO: make common
   this.currentStudent.maps = [];
+
   for (let mapId of studentMaps) {
     this.studentMapService.getStudentMap(mapId) // Change to obtain current course 
     .subscribe(map => {
         if (map) {
-          let studentMap = new StudentMap(map._id, map.course_id, map.competences);
+          let studentMap = new StudentMap(map._id, map.course_id, map.competences, map.connections);
           this.getStudentCompenteces(map.competences).subscribe((competences: StudentCompetence[]) => {
             studentMap.competences = competences;
             this.currentStudent.maps.push(studentMap);
