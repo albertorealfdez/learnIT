@@ -78,8 +78,10 @@ export class StudentMapComponent implements OnInit, AfterViewInit {
         this.nodes[index].x = this.startX;
         this.nodes[index].y = this.startY;
       } else {
-          this.nodes[index].x = this.nodes[index-1].x + index + 75;
-          this.nodes[index].y = this.nodes[index-1].y + index + 75;
+        let deltaY = index % 2 === 0 ? index + 100 : index - 100;
+
+        this.nodes[index].x = this.nodes[index-1].x + index + 100;
+        this.nodes[index].y = this.nodes[index-1].y + deltaY;
       }
     }
   }
@@ -97,6 +99,7 @@ export class StudentMapComponent implements OnInit, AfterViewInit {
   }
   
   public render() {
+    let radius = 30;
     this.processNodePositions();
 
     this.node = this.svg.append('g')
@@ -105,7 +108,7 @@ export class StudentMapComponent implements OnInit, AfterViewInit {
       .data(this.nodes)
       .enter()
         .append('circle')
-          .attr('r', 30)
+          .attr('r', radius)
           .attr('fill', (d) => { return this.color(d.group); })
           .attr('cx', (d) => { return d.x; })
           .attr('cy', (d) => { return d.y; })
@@ -116,7 +119,7 @@ export class StudentMapComponent implements OnInit, AfterViewInit {
       .data(this.links)
       .enter()
         .append('line')
-          .attr('stroke-width', 5)
+          .attr('stroke-width', 3)
           .attr('stroke', 'black')
           .attr('marker-end', 'url(#end-arrow)'); 
         
@@ -140,9 +143,9 @@ export class StudentMapComponent implements OnInit, AfterViewInit {
     this.processLinksPositions();
 
     this.link
-        .attr('x1', (d) => { return d.source.x + 30; })
+        .attr('x1', (d) => { return d.source.x + radius; })
         .attr('y1', (d) => { return d.source.y; })
-        .attr('x2', (d) => { return d.target.x - 30; })
+        .attr('x2', (d) => { return d.target.x - radius; })
         .attr('y2', (d) => { return d.target.y; });
   }
 }
