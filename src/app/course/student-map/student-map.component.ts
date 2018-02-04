@@ -22,12 +22,17 @@ export class StudentMapComponent implements OnInit, AfterViewInit {
   @Input() student: Student;
   @Input() course: Course;
 
-  svg;
-  color;
-  simulation;
-  link;
-  node;
+  private svg;
+  private color;
+  private simulation;
+  private startX;
+  private startY;
   
+  private link;
+  private node;
+  private nodes;
+  private links;
+
   constructor(
     private selectionService: SelectionEngineService,
     private router: Router
@@ -41,76 +46,20 @@ export class StudentMapComponent implements OnInit, AfterViewInit {
     
     let width = +this.svg.attr('width');
     let height = +this.svg.attr('height');
-    let startX = width / 3;
-    let startY = height /3;
+    this.startX = width / 3;
+    this.startY = height / 3;
 
     this.color = d3.scaleOrdinal(d3.schemeCategory20);
-    
+
     this.simulation = d3.forceSimulation()
         .force('link', d3.forceLink().id(function(d: any) { return d._id; }))
         .force('charge', d3.forceManyBody())
-        .force('center', d3.forceCenter(startX, startY));
+        .force('center', d3.forceCenter(this.startX, this.startY));
 
-    // Temporal
-    /*this.studentMap.connections = [
-      { 'source': '5a2adaab975a6d4285359f0a', 'target': '5a2adaab975a6d4285359f0b'}
-    ];*/
+    this.nodes = Object.assign(this.studentMap.competences);
+    this.links = Object.assign(this.studentMap.connections);
+
     this.render();
-  }
-
-  ticked() {
-    this.link
-        .attr('x1', (d) => { return d.source.x; })
-        .attr('y1', (d) => { return d.source.y; })
-        .attr('x2', (d) => { return d.target.x; })
-        .attr('y2', (d) => { return d.target.y; });
-
-    this.node
-        .attr('cx', (d) => { return d.x; })
-        .attr('cy', (d) => { return d.y; });
-  }
-  
-  public render() {
-    this.link = this.svg.append('g')
-    .attr('class', 'links')
-    .selectAll('line')
-    .data(this.studentMap.connections)
-    .enter()
-      .append('line')
-        .attr('stroke-width', 5)
-        .attr('stroke', 'black')
-        .attr('marker-end', 'url(#end-arrow)')
-    
-    this.node = this.svg.append('g')
-      .attr('class', 'nodes')
-      .selectAll('circle')
-      .data(this.studentMap.competences)
-      .enter()
-        .append('circle')
-          .attr('r', 30)
-          .attr('fill', (d)=> { return this.color(d.group); })
-        
-        
-    this.svg.append('svg:defs').append('svg:marker')
-      .attr('id', 'end-arrow')
-      .attr('viewBox', '0 -5 10 10')
-      .attr('refX', 6)
-      .attr('markerWidth', 5)
-      .attr('markerHeight', 5)
-      .attr('orient', 'auto')
-      .append('svg:path')
-        .attr('d', 'M0,-5L10,0L0,5')
-        .attr('fill', '#000');
-
-    this.node.append('title')
-      .text(function(d) { return d._id; });
-
-    this.simulation
-      .nodes(this.studentMap.competences)
-      .on('tick', ()=>{return this.ticked()});
-
-    this.simulation.force('link')
-      .links(this.studentMap.connections);  
   }
 
   public checkCompetence(compentence: StudentCompetence): void {
@@ -121,4 +70,79 @@ export class StudentMapComponent implements OnInit, AfterViewInit {
     }
   }
 
+  public processNodePositions() {      
+    for (let i in this.nodes) {
+      let index:number = parseInt(i);
+      
+      if (index === 0) {
+        this.nodes[index].x = this.startX;
+        this.nodes[index].y = this.startY;
+      } else {
+          this.nodes[index].x = this.nodes[index-1].x + index + 75;
+          this.nodes[index].y = this.nodes[index-1].y + index + 75;
+      }
+    }
+  }
+
+  public processLinksPositions() {      
+    for (let link of this.links) {
+      let source = this.nodes.filter(node => node._id === link.source._id)[0];
+      let target = this.nodes.filter(node => node._id === link.target._id)[0];
+
+      link.source.x = source.x;
+      link.source.y = source.y;
+      link.target.x = target.x;
+      link.target.y = target.y;
+    }
+  }
+  
+  public render() {
+    this.processNodePositions();
+
+    this.node = this.svg.append('g')
+      .attr('class', 'nodes')
+      .selectAll('circle')
+      .data(this.nodes)
+      .enter()
+        .append('circle')
+          .attr('r', 30)
+          .attr('fill', (d) => { return this.color(d.group); })
+          .attr('cx', (d) => { return d.x; })
+          .attr('cy', (d) => { return d.y; })
+
+    this.link = this.svg.append('g')
+      .attr('class', 'links')
+      .selectAll('line')
+      .data(this.links)
+      .enter()
+        .append('line')
+          .attr('stroke-width', 5)
+          .attr('stroke', 'black')
+          .attr('marker-end', 'url(#end-arrow)'); 
+        
+    this.svg.append('svg:defs').append('svg:marker')
+      .attr('id', 'end-arrow')
+      .attr('viewBox', '0 -5 10 10')
+      .attr('refX', 6)
+      .attr('markerWidth', 4)
+      .attr('markerHeight', 3)
+      .attr('orient', 'auto')
+      .append('svg:path')
+        .attr('d', 'M0,-5L10,0L0,5')
+        .attr('fill', '#000');
+
+    this.simulation
+      .nodes(this.nodes);
+
+    this.simulation.force('link')
+      .links(this.links); 
+      
+    this.processLinksPositions();
+
+    this.link
+        .attr('x1', (d) => { return d.source.x + 30; })
+        .attr('y1', (d) => { return d.source.y; })
+        .attr('x2', (d) => { return d.target.x - 30; })
+        .attr('y2', (d) => { return d.target.y; });
+  }
 }
