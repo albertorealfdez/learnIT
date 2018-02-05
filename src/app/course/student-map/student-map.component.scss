@@ -2,32 +2,21 @@
 
 .student-map {
   &__competence {
-    cursor: pointer;
-    list-style: none;
-    display: inline-block;     
-    margin-right: 10px;
-  }
-
-  &__competence {
-    padding: 10px;
-    border-radius: 100%;
-    text-align: center;
-    
+    cursor: pointer;    
     p {
       margin: 0;
     }
-  }
-
-  &__competence--locked {
-      background-color: $dawn;
-      pointer-events: none;
-  }
-
-  &__competence--unlocked {
-    background-color: $manz;
-  }
-
-  &__competence--completed {
-    background-color: $forest-green;
+    &--locked {
+        fill: $dawn;
+        pointer-events: none;
+    }
+  
+    &--unlocked {
+      fill: $manz;
+    }
+  
+    &--completed {
+      fill: $forest-green;
+    }
   }
 }

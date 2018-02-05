@@ -70,6 +70,10 @@ export class StudentMapComponent implements OnInit, AfterViewInit {
     }
   }
 
+  public getCompetenceClass(competence: any): string {
+    return `student-map__competence--${competence.completed ? 'completed' : competence.locked ? 'locked' : 'unlocked' }`;
+  }
+
   public processNodePositions() {      
     for (let i in this.nodes) {
       let index:number = parseInt(i);
@@ -103,15 +107,28 @@ export class StudentMapComponent implements OnInit, AfterViewInit {
     this.processNodePositions();
 
     this.node = this.svg.append('g')
-      .attr('class', 'nodes')
       .selectAll('circle')
       .data(this.nodes)
       .enter()
-        .append('circle')
+      .append('circle')
+          .attr('class', (d) => { return this.getCompetenceClass(d); })
           .attr('r', radius)
           .attr('fill', (d) => { return this.color(d.group); })
           .attr('cx', (d) => { return d.x; })
-          .attr('cy', (d) => { return d.y; })
+          .attr('cy', (d) => { return d.y; });
+    
+    let text = this.svg.append('g')
+      .attr('class', 'labels')
+      .selectAll('text')
+      .data(this.nodes)
+      .enter()
+      .append('text')
+        .attr('x', (d) => { return d.x - radius/2; })
+        .attr('y', (d) => { return d.y; })
+        .attr("font-family", "sans-serif")
+        .attr("font-size", "20px")
+        .attr("fill", "white")
+        .text((d) => { return d.key; });
 
     this.link = this.svg.append('g')
       .attr('class', 'links')
