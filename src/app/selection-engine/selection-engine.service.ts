@@ -44,9 +44,6 @@ export class SelectionEngineService {
           } else {
             competence.force -= (activity.difficulty * 10);
           }
-          if (competence.force > 0) {
-            competence.locked = true;
-          }
           if (competence.force >= competence.minThreshold) {
             competence.completed = true;
           } else {

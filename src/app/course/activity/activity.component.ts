@@ -6,6 +6,7 @@ import { ActivityService } from '../../shared/activity/activity.service';
 import { Student, StudentService } from '../../student';
 import { SelectionEngineService } from '../../selection-engine/selection-engine.service';
 import { StudentCompetenceService } from '../../shared/competence/student-competence.service';
+import { StudentCompetence } from 'app/shared';
 
 @Component({
   selector: 'app-activity',
@@ -18,6 +19,7 @@ export class ActivityComponent implements OnInit {
   public selectedAnswer: string;
   public wrongAnswer: boolean;
   public student: Student;
+  private changedCompetences: StudentCompetence[];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -31,6 +33,7 @@ export class ActivityComponent implements OnInit {
   ngOnInit() {
     this.getCurrentActivity();
     this.getCurrentStudent();
+    this.changedCompetences = [];
   }
 
   public getCurrentStudent() {
@@ -60,15 +63,38 @@ export class ActivityComponent implements OnInit {
     this.selectionService.processCompetences(isCorrect, this.activity, this.student);
 
     for (let competenceId of this.activity.competences) {
-      let updatedCompetence = this.student.maps[0].competences.filter(competence => competence._id === competenceId)[0];
-      this.competenceService.updateCompetence(updatedCompetence)
+      let updatedCompetence: StudentCompetence = this.student.maps[0].competences.filter(competence => competence._id === competenceId)[0];
+      this.processConnections(updatedCompetence);
+      this.changedCompetences.push(updatedCompetence);
+    }
+    this.updateCompetences();
+    window.history.back(); // TODO: change to current course page
+  }
+
+  public processConnections(updatedCompetence: StudentCompetence): void {
+    let competenceConnections = this.student.maps[0].connections.filter(
+      connection => connection.source._id === updatedCompetence._id
+    );
+
+    for (let connection of competenceConnections) {
+      if (updatedCompetence.force >= connection.threshold) {
+        let targetCompetence: StudentCompetence = this.student.maps[0].competences.filter(
+          target => connection.target._id === target._id
+        )[0];
+        targetCompetence.locked = false;
+        this.changedCompetences.push(targetCompetence);
+      }
+    }
+  }
+
+  public updateCompetences(): void {
+    for (let competence of this.changedCompetences) {
+      this.competenceService.updateCompetence(competence)
         .subscribe(competence => {
         },
         error => {
           console.error('Error updating competence', error);
         });
-      
     }
-    window.history.back(); // TODO: change to current course page
   }
 }

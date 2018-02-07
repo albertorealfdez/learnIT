@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { ViewEncapsulation } from '@angular/core';
 
 import * as d3 from 'd3';
 
@@ -14,7 +15,8 @@ import { Course } from '../course.model';
 @Component({
   selector: 'app-student-map',
   templateUrl: './student-map.component.html',
-  styleUrls: ['./student-map.component.scss']
+  styleUrls: ['./student-map.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class StudentMapComponent implements OnInit, AfterViewInit {
@@ -52,7 +54,7 @@ export class StudentMapComponent implements OnInit, AfterViewInit {
     this.color = d3.scaleOrdinal(d3.schemeCategory20);
 
     this.simulation = d3.forceSimulation()
-        .force('link', d3.forceLink().id(function(d: any) { return d._id; }))
+        .force('link', d3.forceLink().id(function(node: any) { return node._id; }))
         .force('charge', d3.forceManyBody())
         .force('center', d3.forceCenter(this.startX, this.startY));
 
@@ -84,7 +86,7 @@ export class StudentMapComponent implements OnInit, AfterViewInit {
       } else {
         let deltaY = index % 2 === 0 ? index + 100 : index - 100;
 
-        this.nodes[index].x = this.nodes[index-1].x + index + 100;
+        this.nodes[index].x = this.nodes[index-1].x + index + 120;
         this.nodes[index].y = this.nodes[index-1].y + deltaY;
       }
     }
@@ -111,11 +113,14 @@ export class StudentMapComponent implements OnInit, AfterViewInit {
       .data(this.nodes)
       .enter()
       .append('circle')
-          .attr('class', (d) => { return this.getCompetenceClass(d); })
+          .attr('class', (node) => { return this.getCompetenceClass(node); })
           .attr('r', radius)
-          .attr('fill', (d) => { return this.color(d.group); })
-          .attr('cx', (d) => { return d.x; })
-          .attr('cy', (d) => { return d.y; });
+          .attr('fill', (node) => { return this.color(node.group); })
+          .attr('cx', (node) => { return node.x; })
+          .attr('cy', (node) => { return node.y; })
+      .on('click', (node) => {
+        this.checkCompetence(node);
+      })
     
     let text = this.svg.append('g')
       .attr('class', 'labels')
@@ -123,12 +128,12 @@ export class StudentMapComponent implements OnInit, AfterViewInit {
       .data(this.nodes)
       .enter()
       .append('text')
-        .attr('x', (d) => { return d.x - radius/2; })
-        .attr('y', (d) => { return d.y; })
+        .attr('x', (node) => { return node.x - radius/2; })
+        .attr('y', (node) => { return node.y; })
         .attr("font-family", "sans-serif")
         .attr("font-size", "20px")
         .attr("fill", "white")
-        .text((d) => { return d.key; });
+        .text((node) => { return node.key; });
 
     this.link = this.svg.append('g')
       .attr('class', 'links')
@@ -160,9 +165,9 @@ export class StudentMapComponent implements OnInit, AfterViewInit {
     this.processLinksPositions();
 
     this.link
-        .attr('x1', (d) => { return d.source.x + radius; })
-        .attr('y1', (d) => { return d.source.y; })
-        .attr('x2', (d) => { return d.target.x - radius; })
-        .attr('y2', (d) => { return d.target.y; });
+        .attr('x1', (node) => { return node.source.x + radius; })
+        .attr('y1', (node) => { return node.source.y; })
+        .attr('x2', (node) => { return node.target.x - radius; })
+        .attr('y2', (node) => { return node.target.y; });
   }
 }
