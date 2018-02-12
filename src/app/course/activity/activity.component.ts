@@ -68,6 +68,16 @@ export class ActivityComponent implements OnInit {
       this.changedCompetences.push(updatedCompetence);
     }
     this.updateCompetences();
+    this.activity.started = false; 
+    // Set updated activity
+    this.student.activities.push(this.activity._id);
+    
+    this.studentService.updateStudentActivities(this.student)
+      .subscribe(response => {
+      },
+      error => {
+        console.error('Error in update student', error);
+      });
     window.history.back(); // TODO: change to current course page
   }
 

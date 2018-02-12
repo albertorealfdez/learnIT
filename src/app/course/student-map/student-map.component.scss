@@ -2,21 +2,29 @@
 
 .student-map {
   &__competence {
-    cursor: pointer;    
-    p {
-      margin: 0;
-    }
+    cursor: pointer;
+
     &--locked {
-        fill: $dawn;
-        pointer-events: none;
+      fill: $dawn;
+      pointer-events: none;
     }
-  
+    
     &--unlocked {
       fill: $manz;
     }
-  
+    
     &--completed {
       fill: $forest-green;
+    }
+    
+    &__label {
+      margin: 0;
+      cursor: pointer;
+      fill: white;
+
+      &--locked {
+        pointer-events: none;
+      }
     }
   }
 }

@@ -73,7 +73,11 @@ export class StudentMapComponent implements OnInit, AfterViewInit {
   }
 
   public getCompetenceClass(competence: any): string {
-    return `student-map__competence--${competence.completed ? 'completed' : competence.locked ? 'locked' : 'unlocked' }`;
+    return `student-map__competence student-map__competence--${competence.completed ? 'completed' : competence.locked ? 'locked' : 'unlocked' }`;
+  }
+
+  public getLabelClass(competence: any): string {
+    return `student-map__competence__label ${competence.locked ? 'student-map__competence__label--locked' : '' }`;
   }
 
   public processNodePositions() {      
@@ -115,7 +119,6 @@ export class StudentMapComponent implements OnInit, AfterViewInit {
       .append('circle')
           .attr('class', (node) => { return this.getCompetenceClass(node); })
           .attr('r', radius)
-          .attr('fill', (node) => { return this.color(node.group); })
           .attr('cx', (node) => { return node.x; })
           .attr('cy', (node) => { return node.y; })
       .on('click', (node) => {
@@ -123,24 +126,21 @@ export class StudentMapComponent implements OnInit, AfterViewInit {
       })
     
     let text = this.svg.append('g')
-      .attr('class', 'labels')
       .selectAll('text')
       .data(this.nodes)
       .enter()
       .append('text')
+        .attr('class', (node) => { return this.getLabelClass(node); })
         .attr('x', (node) => { return node.x - radius/2; })
         .attr('y', (node) => { return node.y; })
-        .attr("font-family", "sans-serif")
-        .attr("font-size", "20px")
-        .attr("fill", "white")
         .text((node) => { return node.key; });
 
     this.link = this.svg.append('g')
-      .attr('class', 'links')
       .selectAll('line')
       .data(this.links)
       .enter()
         .append('line')
+          .attr('class', 'student-map__connection')
           .attr('stroke-width', 3)
           .attr('stroke', 'black')
           .attr('marker-end', 'url(#end-arrow)'); 
