@@ -34,6 +34,7 @@ export class StudentMapComponent implements OnInit, AfterViewInit {
   private node;
   private nodes;
   private links;
+  private this.nodeRadius = 30;
 
   constructor(
     private selectionService: SelectionEngineService,
@@ -80,7 +81,7 @@ export class StudentMapComponent implements OnInit, AfterViewInit {
     return `student-map__competence__label ${competence.locked ? 'student-map__competence__label--locked' : '' }`;
   }
 
-  public processNodePositions() {      
+  public processNodePositions(): void {      
     for (let i in this.nodes) {
       let index:number = parseInt(i);
       
@@ -96,7 +97,7 @@ export class StudentMapComponent implements OnInit, AfterViewInit {
     }
   }
 
-  public processLinksPositions() {      
+  public processLinksPositions(): void {      
     for (let link of this.links) {
       let source = this.nodes.filter(node => node._id === link.source._id)[0];
       let target = this.nodes.filter(node => node._id === link.target._id)[0];
@@ -105,11 +106,18 @@ export class StudentMapComponent implements OnInit, AfterViewInit {
       link.source.y = source.y;
       link.target.x = target.x;
       link.target.y = target.y;
+
+      link.labelX = link.source.x + this.nodeRadius + 10;
+
+      if (link.target.y < link.source.y) {
+        link.labelY = link.target.y + this.nodeRadius / 2;
+      } else {
+        link.labelY = link.target.y - this.nodeRadius / 2;        
+      }
     }
   }
   
   public render() {
-    let radius = 30;
     this.processNodePositions();
 
     this.node = this.svg.append('g')
@@ -118,22 +126,33 @@ export class StudentMapComponent implements OnInit, AfterViewInit {
       .enter()
       .append('circle')
           .attr('class', (node) => { return this.getCompetenceClass(node); })
-          .attr('r', radius)
+          .attr('title', (node) => { return node.title; })
+          .attr('r', this.nodeRadius)
           .attr('cx', (node) => { return node.x; })
           .attr('cy', (node) => { return node.y; })
       .on('click', (node) => {
         this.checkCompetence(node);
       })
     
-    let text = this.svg.append('g')
+    let label = this.svg.append('g')
       .selectAll('text')
       .data(this.nodes)
       .enter()
       .append('text')
         .attr('class', (node) => { return this.getLabelClass(node); })
-        .attr('x', (node) => { return node.x - radius/2; })
+        .attr('x', (node) => { return node.x - this.nodeRadius/4; })
         .attr('y', (node) => { return node.y; })
         .text((node) => { return node.key; });
+    
+    let status = this.svg.append('g')
+        .selectAll('text')
+        .data(this.nodes)
+        .enter()
+      .append('text')
+        .attr('class', 'student-map__competence__status')
+        .attr('x', (node) => { return node.x - this.nodeRadius/2; })
+        .attr('y', (node) => { return node.y + this.nodeRadius + this.nodeRadius/2; })
+        .text((node) => { return `${node.force}/${node.minThreshold}`; });
 
     this.link = this.svg.append('g')
       .selectAll('line')
@@ -143,7 +162,7 @@ export class StudentMapComponent implements OnInit, AfterViewInit {
           .attr('class', 'student-map__connection')
           .attr('stroke-width', 3)
           .attr('stroke', 'black')
-          .attr('marker-end', 'url(#end-arrow)'); 
+          .attr('marker-end', 'url(#end-arrow)');
         
     this.svg.append('svg:defs').append('svg:marker')
       .attr('id', 'end-arrow')
@@ -165,9 +184,22 @@ export class StudentMapComponent implements OnInit, AfterViewInit {
     this.processLinksPositions();
 
     this.link
-        .attr('x1', (node) => { return node.source.x + radius; })
-        .attr('y1', (node) => { return node.source.y; })
-        .attr('x2', (node) => { return node.target.x - radius; })
-        .attr('y2', (node) => { return node.target.y; });
+        .attr('x1', (link) => { return link.source.x + this.nodeRadius; })
+        .attr('y1', (link) => { return link.source.y; })
+        .attr('x2', (link) => { return link.target.x - this.nodeRadius; })
+        .attr('y2', (link) => { return link.target.y; });
+
+    let linkThreshold = this.svg.append('g')
+      .selectAll('text')
+      .data(this.links)
+      .enter()
+        .append('text')
+          .attr('class', 'student-map__connection__label')
+          .attr('font-size', 16)
+          .attr('x', (link) => { return link.labelX; })
+          .attr('y', (link) => { return link.labelY; })
+          .text((link) => { return link.threshold; });
+          
+    console.log(this.links);
   }
 }

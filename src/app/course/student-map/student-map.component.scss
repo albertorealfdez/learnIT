@@ -20,11 +20,21 @@
     &__label {
       margin: 0;
       cursor: pointer;
-      fill: white;
+      fill: $white;
 
       &--locked {
         pointer-events: none;
       }
+    }
+
+    &__force {
+      fill: $black;
+    }
+  }
+
+  &__connection {
+    &__label {
+      fill: $black;
     }
   }
 }
