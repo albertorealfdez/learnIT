@@ -34,7 +34,7 @@ export class StudentMapComponent implements OnInit, AfterViewInit {
   private node;
   private nodes;
   private links;
-  private this.nodeRadius = 30;
+  private nodeRadius = 30;
 
   constructor(
     private selectionService: SelectionEngineService,
@@ -134,6 +134,9 @@ export class StudentMapComponent implements OnInit, AfterViewInit {
         this.checkCompetence(node);
       })
     
+    this.node.append("title")
+      .text((node) => { return node.title });
+
     let label = this.svg.append('g')
       .selectAll('text')
       .data(this.nodes)
