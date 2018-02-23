@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AuthGuard } from '../shared/guards/auth.guard';
+
 import { StudentComponent } from './student.component';
 
 const studentRoutes: Routes = [
   {
     path: 'student',
-    component: StudentComponent
+    component: StudentComponent,
+    canActivate: [ AuthGuard ]
   }
 ];
 
@@ -16,7 +19,8 @@ const studentRoutes: Routes = [
   ],
   exports: [
       RouterModule
-   ]
+   ],
+   providers: [ AuthGuard ]
 })
 
 export class StudentRoutingModule { }

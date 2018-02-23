@@ -7,4 +7,5 @@ export class Activity {
   public choices: string[];
   public difficulty: number;
   public correct: number;
+  public started: boolean;
 }

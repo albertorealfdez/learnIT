@@ -3,11 +3,11 @@ import { Component, OnInit } from '@angular/core';
 
 import { Student } from './student.model';
 import { User } from '../shared/user.model';
-import { StudentMap } from '../student-map';
+import { StudentMap } from '../course/student-map';
 import { StudentService } from './student.service';
 import { CourseService } from '../course/course.service';
 import { Course } from '../course';
-import { StudentMapService } from '../student-map/student-map.service';
+import { StudentMapService } from '../course/student-map/student-map.service';
 import { StudentCompetenceService } from '../shared/competence/student-competence.service';
 import { StudentCompetence } from '../shared/competence';
 
@@ -30,7 +30,7 @@ export class StudentComponent implements OnInit {
 
   ngOnInit() {
     // TODO: change to current student
-    this.studentService.getStudentByEmail(localStorage.getItem('user'))
+    /* this.studentService.getStudentByEmail(localStorage.getItem('user'))
       .subscribe(student => {
         if (student) {
           this.student = student;
@@ -41,6 +41,10 @@ export class StudentComponent implements OnInit {
       },
       error => {
         console.error('Error in get Course', error);
+      }); */
+      this.studentService.configCurrentStudent();
+      this.studentService.loggedStudent.subscribe(student => {
+        this.student = student;
       });
   }
 

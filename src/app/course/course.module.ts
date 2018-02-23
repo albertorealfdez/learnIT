@@ -9,7 +9,8 @@ import { CourseService } from './course.service';
 import { CompetenceComponent } from './competence/competence.component';
 import { ActivityComponent } from './activity/activity.component';
 import { SelectionEngineService } from '../selection-engine/selection-engine.service';
-import { StudentMapService } from '../student-map/student-map.service';
+import { StudentMapComponent } from './student-map/student-map.component';
+import { StudentMapService } from './student-map/student-map.service';
 import { StudentCompetenceService } from '../shared/competence/student-competence.service';
 
 @NgModule({
@@ -17,7 +18,8 @@ import { StudentCompetenceService } from '../shared/competence/student-competenc
   declarations: [
     CourseComponent,
     CompetenceComponent,
-    ActivityComponent
+    ActivityComponent,
+    StudentMapComponent
   ],
   providers: [
     CourseService,

@@ -5,14 +5,14 @@ import { Course } from './course.model';
 import { CourseService } from './course.service';
 import { CompetenceService } from './competence';
 
-import { StudentMap } from '../student-map';
+import { StudentMap } from './student-map';
 import { StudentCompetence } from '../shared/competence/student-competence.model';
 import { Activity } from '../shared/activity/activity.model';
 import {
   Student,
   StudentService
 } from '../student';
-import { StudentMapService } from '../student-map/student-map.service';
+import { StudentMapService } from './student-map/student-map.service';
 import { SelectionEngineService } from '../selection-engine/selection-engine.service';
 import { StudentCompetenceService } from '../shared/competence/student-competence.service';
 import { ActivityService } from '../shared/activity/activity.service';
@@ -41,19 +41,23 @@ export class CourseComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.student = this.studentService.getCurrentStudent();  
-    this.getCurrentCourse();
+    this.student = this.studentService.getCurrentStudent();
+    
+    if (!this.student) {
+      this.router.navigateByUrl('/student');
+    } else {
+      this.getCurrentCourse();
+    }
   }
 
   public getCurrentCourse(): void {
     let courseKey: string = this.activatedRoute.snapshot.params['key'];
-
     this.courseService.getCourseByKey(courseKey)
       .subscribe(course => {
-          if (course) {
+          if (course) {            
             this.course = course; // TODO: check Object.assign
             this.getCourseActivites();
-            this.currentMap = this.student.maps.filter(map => map.courseId === this.course._id)[0];
+            this.currentMap = this.student.maps.filter(map => map.courseId == this.course._id)[0];
           }
         },
         error => {
@@ -102,13 +106,5 @@ export class CourseComponent implements OnInit {
           console.error('Error in get Course', error);
         }
       );
-  }
-
-  public checkCompetence(compentence: StudentCompetence): void {
-    let activity: Activity = this.selectionService.getNextActivity(this.student, this.course, compentence);
-
-    if (activity) {
-      this.router.navigate(['/activity', activity._id]);
-    }
   }
 }
