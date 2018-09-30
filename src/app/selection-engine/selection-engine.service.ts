@@ -26,7 +26,6 @@ export class SelectionEngineService {
     let startedActivity: Activity = course.activities.filter(activity => activity.started)[0];
 
     if (startedActivity && this.isValidActivity(startedActivity, competence, student)) {
-      console.log(startedActivity.key, ' is started!');
       return startedActivity;
     } else {
       for (let courseActivity of course.activities) {
@@ -48,11 +47,8 @@ export class SelectionEngineService {
     for (let activityCompetence of activity.competences) {
       for (let competence of student.maps[0].competences) { // TODO: change index to current map
         if (activityCompetence === competence._id) {
-          if (isCorrect) {
-            competence.force += (activity.difficulty * 10);
-          } else {
-            competence.force -= (activity.difficulty * 10);
-          }
+          competence.force = this.computeValue(0, isCorrect, competence.force, activity.difficulty);
+          
           if (competence.force >= competence.minThreshold) {
             competence.completed = true;
           } else {
@@ -61,5 +57,20 @@ export class SelectionEngineService {
         }
       }
     }
+  }
+
+  // TODO: change to current selection algorythm
+  public computeValue(type: number, isCorrect: boolean, competenceForce: number, activityDifficulty: number): number {
+    let value: number;
+    let factor: number = isCorrect ? 1 : -1;
+
+    switch(type) {
+      case 0:
+        value = competenceForce + factor * activityDifficulty * 10;      
+        break;       
+      default:
+        value = competenceForce + factor * activityDifficulty;            
+    }
+    return value;
   }
 }

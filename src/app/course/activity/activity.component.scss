@@ -1,14 +1,17 @@
 @import '../../../styles/main.scss';
 
 /* TODO: move to general layout **/
-.activity-page__abstract {
-  background-color: $english-holly;
-  margin-top: 4rem;
-  min-height: 10rem;
-}
+.activity-page {
+  &__abstract {
+    background-color: $english-holly;
+    margin-top: 4rem;
+    min-height: 10rem;
+    padding: 1rem;
+  }
  
-.activity-page__card {
-  color: black;
-  margin-top: -2.5rem;
-  width: 30rem;
+  &__card {
+    color: black;
+    margin: -2.5rem auto auto auto;
+    width: 30rem;
+  }
 }
