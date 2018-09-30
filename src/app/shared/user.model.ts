@@ -1,4 +1,3 @@
-import { Course } from '../course/course.model';
 
 export class User {
   public _id: string;
@@ -6,13 +5,13 @@ export class User {
   public email: string;
   public password: string;
   public type: number;
-  public courses: Course[];
+  public courses: Object[];
 
   constructor(
       id: string,
       name: string,
       email: string,
-      courses: Course[]
+      courses: Object[]
   ) {
     this._id = id;
     this.email = email;

@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 
 import { User } from '../shared/user.model';
-import { Student } from '../student';
 
 @Injectable()
 export class UserService {

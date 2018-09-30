@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -9,10 +9,7 @@ import { MaterialModule } from './material.module';
 // App modules
 import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app-routing.module';
-import { HeaderModule } from './header/header.module';
 import { HomeModule } from './home/home.module';
-import { StudentModule } from './student/student.module';
-import { CourseModule } from './course/course.module';
 
 // App components
 import { AppComponent } from './app.component';
@@ -29,10 +26,7 @@ import { XHRInterceptor } from './interceptors/xhr.interceptor';
     MaterialModule,
     CoreModule, // App modules
     AppRoutingModule,
-    HeaderModule,
-    HomeModule,
-    StudentModule,
-    CourseModule
+    HomeModule
   ],
   declarations: [ AppComponent ],
   providers: [
